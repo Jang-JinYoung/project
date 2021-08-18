@@ -16,5 +16,5 @@ class MapAPI extends Component {
 }
 
 export default GoogleApiWrapper({
-    apiKey: "AIzaSyCpifBwNVUmEjUBo73_6fjYI6Lj9YERhXw",
+    apiKey: "",
 })(MapAPI);
