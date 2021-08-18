@@ -1,10 +1,11 @@
 import React from 'react';
+import Section from './Section'
 import '../css/about.css';
 
 const About = () => {
     return (
         <div>
-            <h1>aboutasdaasdklhjsadghklsfdlhkgsdhklghlksdghklsdghkljsdgklhsdglhk</h1>
+            About
         </div>
     );
 };

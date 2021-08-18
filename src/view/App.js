@@ -43,8 +43,8 @@ import { Route } from 'react-router-dom';
 function App() {
   return (
       <div>
-        <Route path="/main" component={Main}/>
-        <Route path="/about" component={About}/>
+        <Route path="/" component={Main} />
+        <Route path="/about" component={About} />
       </div>
   );
 }

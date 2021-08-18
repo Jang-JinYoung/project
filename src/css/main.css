@@ -1,31 +1,5 @@
-header{
-    height: 75px; background-color: #006F84; border: 1px solid #253342;
-    position: fixed; width: 100%; z-index: 9999; top: 0; left: 0;
-}
-
-h1 {
-    color: black;
-    line-height: 75px;
-    float: left;
-}
-
-.menu {
-    float: right;
-    list-style: none;
-}
-.menu li{
-    float: left;
-}
-.menu a{
-    line-height: 75px; color: black; padding: 0 15px; display: block;
-}
-
-.wrapper {
-    width: 1170px; margin: 0 auto;
-}
-
-.clearfix{
-    content: '';
-    disiplay: blcok;
-    clear: both;
+.mainDiv {
+    width: 100px;
+    height: 100px;
+    border: 1px solid black;
 }

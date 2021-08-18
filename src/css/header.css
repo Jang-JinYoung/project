@@ -1,0 +1,32 @@
+header{
+    height: 100px; background-color: black; border: 1px solid #253342;
+    position: fixed; width: 100%; z-index: 9999; top: 0; left: 0;
+}
+
+h1 {
+    color: white;
+    line-height: 50px;
+    float: left;
+}
+
+.menu {
+    float: right;
+    list-style: none;
+}
+.menu li{
+    float: left;
+}
+.menu a{
+    line-height: 75px; color: white; padding: 0 15px; display: block;
+}
+
+.wrapper {
+    width: 1170px; margin: 0 auto;
+}
+
+.clearfix{
+    content: '';
+    disiplay: blcok;
+    clear: both;
+}
+
