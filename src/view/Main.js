@@ -1,13 +1,12 @@
 import React from 'react';
-import map from "./Map"
+import GoogleApiWrapper from "./Map";
 import  "../css/main.css"
 import '../css/section.css'
 
 const Main = () => {
     return (
         <section>
-            <map/>
-            Main Page
+            <GoogleApiWrapper/>
         </section>
     );
 };

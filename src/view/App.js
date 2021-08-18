@@ -3,6 +3,7 @@ import About from "./About";
 import Main from "./Main";
 import { Route } from 'react-router-dom';
 import Header from "./Header";
+import Map from "./Map";
 
 // class App extends React.Component {
 //   constructor(props) {
@@ -46,9 +47,9 @@ function App() {
         <Header/>
         <Route path="/" component={Main} exact/>
         <Route path="/about" component={About} />
+        <Route path="/map" component={Map} />
       </div>
   );
 }
-
 
 export default App;
