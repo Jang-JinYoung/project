@@ -1,8 +1,8 @@
 import React from 'react';
-import logo from '../logo.svg';
 import About from "./About";
 import Main from "./Main";
 import { Route } from 'react-router-dom';
+import Header from "./Header";
 
 // class App extends React.Component {
 //   constructor(props) {
@@ -43,7 +43,8 @@ import { Route } from 'react-router-dom';
 function App() {
   return (
       <div>
-        <Route path="/" component={Main} />
+        <Header/>
+        <Route path="/" component={Main} exact/>
         <Route path="/about" component={About} />
       </div>
   );

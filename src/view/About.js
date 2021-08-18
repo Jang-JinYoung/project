@@ -1,12 +1,12 @@
 import React from 'react';
-import Section from './Section'
 import '../css/about.css';
+import '../css/section.css'
 
 const About = () => {
     return (
-        <div>
-            About
-        </div>
+        <section>
+            About Page
+        </section>
     );
 };
 

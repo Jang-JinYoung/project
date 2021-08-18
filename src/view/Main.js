@@ -1,15 +1,16 @@
 import React from 'react';
-import Header from "./Header";
-import Section from "./Section";
+import map from "./Map"
 import  "../css/main.css"
+import '../css/section.css'
 
 const Main = () => {
     return (
-        <div>
-            <Header></Header>
-            <Section></Section>
-        </div>
+        <section>
+            <map/>
+            Main Page
+        </section>
     );
 };
+
 
 export default Main;
