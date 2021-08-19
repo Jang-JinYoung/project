@@ -33,5 +33,5 @@ class MapAPI extends Component {
 }
 
 export default GoogleApiWrapper({
-    apiKey: api.googleAPI,
+    apiKey: api.googleAPI
 })(MapAPI);

@@ -4,6 +4,7 @@ import Main from "./Main";
 import { Route } from 'react-router-dom';
 import Header from "./Header";
 import Map from "./Map";
+import Login from "./Login";
 
 // class App extends React.Component {
 //   constructor(props) {
@@ -48,6 +49,7 @@ function App() {
         <Route path="/" component={Main} exact/>
         <Route path="/about" component={About} />
         <Route path="/map" component={Map} />
+        <Route path="/login" component={Login} />
       </div>
   );
 }
