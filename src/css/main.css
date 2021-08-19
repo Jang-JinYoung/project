@@ -1,0 +1,19 @@
+.tbl {
+    border-collapse:collapse;
+    margin-left: 100px;
+    margin-top: 100px;
+}
+th, td {
+    border:1px solid black;
+}
+
+td {
+    width: 500px;
+    height: 200px;
+}
+
+.tdMap > div > div {
+    margin-top: -130px;
+    margin-left: 10px;
+    relative: absolute;
+}

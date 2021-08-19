@@ -1,27 +1,37 @@
 import React, {Component} from "react";
+import "../css/map.css"
 import {Map, GoogleApiWrapper} from "google-maps-react";
 
-const googleAPI = require("../api");
+const api = require("../api");
 
 class MapAPI extends Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            style:props
+        };
+    }
+
     render() {
+        const {style} = this.state;
         const mapStyles = {
-            width: '25%',
-            height: '50%',
+            position: 'relative',
+            width: style.width,
+            height: style.height,
         }
         return (
-            <div className="MapAPI">
-                <Map
-                    google={this.props.google}
-                    zoom={15}
-                    style={mapStyles}
-                    initialCenter={{lat:37.5, lng:127}}
-                />
-            </div>
+            <Map
+                class = "map"
+                google={this.props.google}
+                zoom={5}
+                style={mapStyles}
+                initialCenter={{lat:37.5, lng:127}}
+            />
         );
     }
 }
 
 export default GoogleApiWrapper({
-    apiKey: googleAPI,
+    apiKey: api.googleAPI,
 })(MapAPI);
