@@ -1,30 +1,32 @@
 import React from 'react';
 import GoogleApiWrapper from "./Map";
-import  "../css/main.css"
-import '../css/section.css'
+import  "../css/main.css";
+import '../css/section.css';
+import image from "../images/82.png";
 
 const Main = () => {
     return (
         <section>
             <table class = "tbl">
                 <tr>
-                    <th colSpan="4">오늘의 여행지</th>
+                    <td class="tdRecommend" colSpan="2">오늘의 여행지 <strong>대한민국</strong></td>
                 </tr>
                 <tr>
-                    {/*<td class="tdMap" rowSpan="5"><GoogleApiWrapper width="25%" height="50%"/></td>*/}
-                    <td class="tdMap" colSpan="4">
+                    <td class="tdMap" colSpan="2">
                         <div class="map">
                             <GoogleApiWrapper width="100%" height="100%"/>
                         </div>
                     </td>
                 </tr>
                 <tr>
-                    <td>수도 : 서울</td>
-                    <td colSpan="3">수도 : 서울</td>
-                </tr>
-                <tr>
-                    <td>언어 : 한국어</td>
-                    <td colSpan="3">수도 : 서울</td>
+                    <td class="tdInfo1" rowSpan="2">
+                        <img class="image" src={image} alt="국기"/>
+                    </td>
+                    <td class="tdInfo2" colSpan="2">
+                        <div>나라</div>
+                        <div>나라</div>
+                        <div>나라</div>
+                    </td>
                 </tr>
             </table>
         </section>
