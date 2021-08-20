@@ -13,6 +13,10 @@ class MapAPI extends Component {
         };
     }
 
+    componentDidMount() {
+
+    }
+
     render() {
         const {style} = this.state;
         const mapStyles = {

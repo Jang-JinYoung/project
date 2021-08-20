@@ -1,10 +1,10 @@
 .tbl {
     border-collapse:collapse;
     border: 1px solid black;
-    margin-left: 100px;
+    margin-left: 200px;
     margin-top: 100px;
+    float: left;
 }
-
 
 .tdRecommend {
     border:1px solid black;
@@ -37,4 +37,27 @@
 
 .gmnoprint, .gm-control-active gm-fullscreen-control {
     display: none !important;
+}
+
+.content {
+    position: absolute;
+    border: 1px solid black;
+    width: 90%;
+    height: 90%;
+    top: 2%;
+    left: 5%;
+}
+
+.content2 {
+    width: 750px;
+    height: 690px;
+    border: 1px solid black;
+    float: left;
+    margin-left: 100px;
+    margin-top: 100px;
+}
+
+.btn1, .btn2 {
+    background-color: #4CAF50;
+    width: 100px;
 }

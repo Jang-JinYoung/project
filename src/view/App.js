@@ -46,10 +46,10 @@ function App() {
   return (
       <div>
         <Header/>
-        <Route path="/" component={Main} exact/>
-        <Route path="/about" component={About} />
-        <Route path="/map" component={Map} />
-        <Route path="/login" component={Login} />
+            <Route path="/" component={Main} exact/>
+            <Route path="/about" component={About} />
+            <Route path="/map" component={Map} />
+            <Route path="/login" component={Login} />
       </div>
   );
 }
