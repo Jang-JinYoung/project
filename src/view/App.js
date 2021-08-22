@@ -5,6 +5,8 @@ import { Route } from 'react-router-dom';
 import Header from "./Header";
 import Map from "./Map";
 import Login from "./Login";
+import Plan from "./Plan";
+import Calendar from "./Calendar";
 
 // class App extends React.Component {
 //   constructor(props) {
@@ -50,6 +52,8 @@ function App() {
             <Route path="/about" component={About} />
             <Route path="/map" component={Map} />
             <Route path="/login" component={Login} />
+            <Route path="/plan" component={Plan} />
+            <Route path="/cal" component={Calendar}/>
       </div>
   );
 }

@@ -28,7 +28,7 @@ class MapAPI extends Component {
             <Map
                 class = "map"
                 google={this.props.google}
-                zoom={5}
+                zoom={6}
                 style={mapStyles}
                 initialCenter={{lat:37.5, lng:127}}
             />

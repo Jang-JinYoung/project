@@ -49,7 +49,7 @@ class Login extends Component {
                 <div className="container">
                     <form className="" onSubmit={this.handleSubmit}>
                         {/*<fieldset className="login">*/}
-                            <div className="logo">Trip<br/> Planner</div>
+                            <div className="logo">Trip Planner</div>
                             <input type="text" className="id" onChange={this.handleChange} placeholder="아이디"/> <br/>
                             <input type="password" className="pw" onChange={this.handleChange} placeholder ="비밀번호"/> <br/>
                             <input type="submit" className="btn" value="로그인"/>
