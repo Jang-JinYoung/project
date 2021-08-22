@@ -1,0 +1,21 @@
+#calendar {
+    border: 1px solid black;
+    width: 200px;
+    height: 183px;
+}
+
+#date {
+    margin-bottom: 4px;
+    text-align: center;
+}
+
+#dateTable {
+    border-collapse: collapse;
+}
+
+#dateTable > tr, td {
+    border: 1px solid black;
+    padding-left: 9px;
+    padding-bottom: 3px;
+    text-align: center;
+}

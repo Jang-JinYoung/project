@@ -1,5 +1,6 @@
 import {useState} from 'react';
 import moment from 'moment';
+import "../css/calendar.css";
 
 const Calendar = () => {
 
@@ -13,7 +14,7 @@ const Calendar = () => {
 
         let result = [];
         let week = firstWeek;
-        for ( week; week <= lastWeek; week++) {
+        for (week; week <= lastWeek; week++) {
             result = result.concat(
                 <tr key={week}>
                     {
@@ -47,13 +48,14 @@ const Calendar = () => {
         return result;
     }
     return (
-        <section>
-            <div>
+        // <section>
+        <div id="calendar">
+            <div id="date">
                 <button onClick={() => setMoment(getMoment.clone().subtract(1, 'month'))}> prev </button>
                 <sapn> {today.format('YYYY년 MM월')}</sapn>
                 <button onClick={() => setMoment(getMoment.clone().add(1, 'month'))}> next </button>
             </div>
-            <table>
+            <table id="dateTable">
                 <thead>
                     <tr>
                         <td>월</td>
@@ -69,7 +71,8 @@ const Calendar = () => {
                     {calendarArr()}
                 </tbody>
             </table>
-        </section>
+        </div>
+        // </section>
     );
 }
 
