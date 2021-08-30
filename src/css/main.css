@@ -1,28 +1,35 @@
-.tbl {
+.content {
+    position: relative;
+    border: 1px solid black;
+    width: 100%;
+    /*height: 90%;*/
+    top: 100px;
+    display: flex;
+    justify-content: space-around;
+}
+
+.tblCountryInfo {
     border-collapse:collapse;
     border: 1px solid black;
-    margin-left: 200px;
-    margin-top: 100px;
-    float: left;
+    /*margin-left: 200px;*/
+    /*margin: 0 auto;*/
 }
 
 .tdRecommend {
     border:1px solid black;
-    text-align: center;
     width: 500px;
     height: 30px;
 }
 
 .tdMap {
-    border: 1px solid black;
+    position: relative;
+    padding: 10px 10px;
 }
 
 .map {
-    /*margin-left: 10px;*/
-    padding-bottom: 500px;
     position: relative;
+    padding-bottom: 500px;
     width: 100%;
-    height: 0%;
 }
 
 .tdInfo1 {
@@ -39,17 +46,10 @@
     display: none !important;
 }
 
-.content {
-    position: absolute;
-    border: 1px solid black;
-    width: 90%;
-    height: 90%;
-    top: 2%;
-    left: 5%;
-}
+
 
 .content2 {
-    width: 750px;
+    width: 500px;
     height: 690px;
     border: 1px solid black;
     float: left;

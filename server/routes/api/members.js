@@ -3,35 +3,16 @@ const router = express.Router();
 const connection = require('../../config/dbconfig.js');
 const bodyParser = require('body-parser');
 
- function sql(query) {
-     //  new Promise(function (resolve, reject) {
-     //     connection.query(query, function (error, results, fields) {
-     //         if (error) {
-     //             console.log(error);
-     //         }
-     //         // console.log(results);
-     //     });
-     // });
-     connection.query(query, function (error, results, fields) {
-         if (error) {
-             console.log(error);
-         }
-         console.log(results);
-         return results;
-     });
-}
 
-
-router.get('/', async (req, res) => {
+router.get('/',  (req, res) => {
     connection.query('SELECT * FROM user', function (error, results, fields) {
         if (error) {
             console.log(error);
         }
-        return new Promise(function (resolve, reject) {
-            resolve(results);
-        });
+        res.send(results);
     });
-    // connection.end();
+//     // connection.end();
+
 });
 
 

@@ -45,8 +45,8 @@ class Login extends Component {
     }
     render() {
         return (
-            <section>
-                <div className="container">
+            <div className="container">
+                <div className="login">
                     <form className="" onSubmit={this.handleSubmit}>
                         {/*<fieldset className="login">*/}
                             <div className="logo">Trip Planner</div>
@@ -56,7 +56,7 @@ class Login extends Component {
                         {/*</fieldset>*/}
                     </form>
                 </div>
-            </section>
+            </div>
         );
     }
 }

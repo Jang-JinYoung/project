@@ -17,7 +17,7 @@ const Plan = () => {
     }
 
     return (
-        <section>
+        <div className="container">
             <div className="search">
                 <div className="selectDate">
                     <div>
@@ -34,7 +34,7 @@ const Plan = () => {
             <div className="map">
                 <GoogleApiWrapper width="100%" height="100%"/>
             </div>
-        </section>
+        </div>
     );
 };
 
