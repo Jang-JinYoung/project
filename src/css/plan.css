@@ -1,7 +1,11 @@
+.container {
+    position: relative;
+    top: 100px;
+    display: flex;
+}
 .search {
     position: relative;
     /*top: 100px;*/
-    float: left;
     width: 30vh;
     border: 1px solid black;
     height: 90vh;
@@ -16,7 +20,6 @@
 
 .map {
     /*position: fixed;*/
-    float: left;
     height: 42.5%;
     width: 85%;
 }

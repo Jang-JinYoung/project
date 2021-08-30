@@ -1,8 +1,8 @@
-import {useState} from 'react';
+import { useState} from 'react';
 import moment from 'moment';
 import "../css/calendar.css";
 
-const Calendar = () => {
+const Calendar = (props) => {
 
     const [getMoment, setMoment] = useState(moment());
     const today = getMoment;
@@ -10,11 +10,12 @@ const Calendar = () => {
     const firstWeek = today.clone().startOf('month').week();
     const lastWeek = today.clone().endOf('month').week() === 1 ? 53 : today.clone().endOf('month').week();
 
+
+    //달력 요일 만드는 함수
     const calendarArr=()=>{
 
         let result = [];
-        let week = firstWeek;
-        for (week; week <= lastWeek; week++) {
+        for (let week = firstWeek; week <= lastWeek; week++) {
             result = result.concat(
                 <tr key={week}>
                     {
@@ -23,20 +24,27 @@ const Calendar = () => {
 
                             if(moment().format('YYYYMMDD') === days.format('YYYYMMDD')){
                                 return(
-                                    <td key={index} style={{backgroundColor:'red'}} >
-                                        <span>{days.format('D')}</span>
+                                    <td
+                                        key={index} style={{backgroundColor:'red'}}
+                                        className={days.format('D')}
+                                        onClick={e => props.function(days.format('D'))}>
+                                        {days.format('D')}
                                     </td>
                                 );
                             }else if(days.format('MM') !== today.format('MM')){
                                 return(
-                                    <td key={index} style={{backgroundColor:'gray'}} >
-                                        <span>{days.format('D')}</span>
+                                    <td key={index} style={{backgroundColor:'gray'}}
+                                        className={days.format('D')}
+                                        onClick={e => props.function(days.format('D'))}>
+                                        {days.format('D')}
                                     </td>
                                 );
                             }else{
                                 return(
-                                    <td key={index}  >
-                                        <span>{days.format('D')}</span>
+                                    <td key={index}
+                                        className={days.format('D')}
+                                        onClick={e => props.function(days.format('D'))} >
+                                        {days.format('D')}
                                     </td>
                                 );
                             }
@@ -47,18 +55,18 @@ const Calendar = () => {
         }
         return result;
     }
+    
     return (
-        // <section>
         <div id="calendar">
             <div id="date">
                 <button onClick={() => setMoment(getMoment.clone().subtract(1, 'month'))}> prev </button>
-                <sapn> {today.format('YYYY년 MM월')}</sapn>
+                <span> {today.format('YYYY년 MM월')}</span>
                 <button onClick={() => setMoment(getMoment.clone().add(1, 'month'))}> next </button>
             </div>
             <table id="dateTable">
                 <thead>
                     <tr>
-                        <td>월</td>
+                        <td onClick={e => props.function("asd")}>월</td>
                         <td>화</td>
                         <td>수</td>
                         <td>목</td>
@@ -72,7 +80,6 @@ const Calendar = () => {
                 </tbody>
             </table>
         </div>
-        // </section>
     );
 }
 

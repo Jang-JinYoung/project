@@ -5,8 +5,9 @@ import Calendar from "./Calendar";
 
 const Plan = () => {
 
-    function onclick(e) {
+    let result = [];
 
+    function showCalendar() {
         var calendar = document.getElementById("calendar");
 
         if(calendar.style.display === "block") {
@@ -16,19 +17,33 @@ const Plan = () => {
         }
     }
 
+    const appendPlan = () => {
+        // console.log(result);
+        return result;
+    }
+
+    const selectDate = (d) => {
+        result.push(d);
+
+        var date1 = document.getElementsByClassName(d);
+
+        date1[0].style.backgroundColor = "black";
+        console.log(result);
+    }
+
     return (
         <div className="container">
             <div className="search">
                 <div className="selectDate">
                     <div>
-                        <p onClick={onclick}>날짜선택</p>
+                        <p onClick={showCalendar}>날짜선택</p>
                     </div>
-                    <div id="calendar" className="calendar" onClick={onclick}>
-                        <Calendar/>
+                    <div id="calendar" className="calendar">
+                        <Calendar function={selectDate}/>
                     </div>
                 </div>
                 <div className="plan">
-                    asdasd
+                    {appendPlan()}
                 </div>
             </div>
             <div className="map">
