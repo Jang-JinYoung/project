@@ -4,6 +4,7 @@ import "../css/calendar.css";
 
 const Calendar = (props) => {
 
+    //비구조화활당
     const [getMoment, setMoment] = useState(moment());
     const today = getMoment;
 
@@ -26,24 +27,27 @@ const Calendar = (props) => {
                                 return(
                                     <td
                                         key={index} style={{backgroundColor:'red'}}
-                                        className={days.format('D')}
-                                        onClick={e => props.function(days.format('D'))}>
+                                        id={days.format('D')}
+                                        onClick={e => props.function(days.format('D'))}
+                                    >
                                         {days.format('D')}
                                     </td>
                                 );
                             }else if(days.format('MM') !== today.format('MM')){
                                 return(
                                     <td key={index} style={{backgroundColor:'gray'}}
-                                        className={days.format('D')}
-                                        onClick={e => props.function(days.format('D'))}>
+                                        id={days.format('D')}
+                                        onClick={e => props.function(days.format('D'))}
+                                    >
                                         {days.format('D')}
                                     </td>
                                 );
                             }else{
                                 return(
                                     <td key={index}
-                                        className={days.format('D')}
-                                        onClick={e => props.function(days.format('D'))} >
+                                        id={days.format('D')}
+                                        onClick={e => props.function(days.format('D'))}
+                                    >
                                         {days.format('D')}
                                     </td>
                                 );

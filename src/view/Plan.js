@@ -1,11 +1,11 @@
-import React from "react";
+import React, {useState} from "react";
 import GoogleApiWrapper from "./Map";
 import "../css/plan.css";
 import Calendar from "./Calendar";
 
 const Plan = () => {
 
-    let result = [];
+    const [elem, setElem] = useState([]);
 
     function showCalendar() {
         var calendar = document.getElementById("calendar");
@@ -17,18 +17,10 @@ const Plan = () => {
         }
     }
 
-    const appendPlan = () => {
-        // console.log(result);
-        return result;
-    }
-
     const selectDate = (d) => {
-        result.push(d);
 
-        var date1 = document.getElementsByClassName(d);
-
-        date1[0].style.backgroundColor = "black";
-        console.log(result);
+        var date1 = document.getElementById(d);
+        setElem([...elem, d]);
     }
 
     return (
@@ -43,7 +35,7 @@ const Plan = () => {
                     </div>
                 </div>
                 <div className="plan">
-                    {appendPlan()}
+                    {elem.map(e => <div key={e}>{e}</div>)}
                 </div>
             </div>
             <div className="map">
