@@ -45,6 +45,7 @@ const Main = () => {
                 </div>
                 <div>이미 회원이신가요? 로그인해서 미뤄둔 계획을 세워볼까요?</div>
                 <div><button type="button" className="btn2">2</button></div>
+                <div>{window.sessionStorage.id}</div>
             </div>
         </div>
     );

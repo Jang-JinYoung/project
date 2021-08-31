@@ -16,7 +16,7 @@ class Login extends Component {
 
     handleChange = e => {
         this.setState({
-            [e.target.name]: e.target.value
+            [e.target.className]: e.target.value
         });
     };
 
@@ -25,19 +25,19 @@ class Login extends Component {
         e.preventDefault();
 
         const {id, pw} = this.state;
-        const auth = {
-            id,
-            pw
-        };
+        const auth = { id, pw };
+        console.log(auth);
 
         axios.post('http://localhost:3001/api/member/auth', auth)
             .then(res => {
                 if(res.data[0].id === auth.id) {
                     console.log("로그인");
+                    //세션처리
+                    window.sessionStorage.setItem('id', auth.id);
+                    document.location.href = '/';
                 } else {
                     console.log("로그인 실패")
                 }
-                document.location.href = '/';
             })
             .catch(err => {
                 console.error(err);

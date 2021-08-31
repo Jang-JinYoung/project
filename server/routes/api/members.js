@@ -24,6 +24,7 @@ router.post('/auth', async (req, res) => {
     const pw = body.pw;
 
     let query = "select * from user where id='"+id+"' and pw='"+pw+"'";
+    console.log(query);
 
     connection.query(query, function (error, results, fields) {
         if (error) {
@@ -34,9 +35,22 @@ router.post('/auth', async (req, res) => {
     });
 
 
+    req.session.id = 'Anoymous';
+    console.log(req.session.id);
+
+
+
 });
 
+router.get('/session',  (req, res) => {
 
+    // res.send(req.session.id);
+    // res.send(req.session.asdasdasd);
+    //
+    // delete req.session.id;
+    // res.send(req.session.id);
+
+});
 
 module.exports = router;
 
