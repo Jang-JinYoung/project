@@ -8,6 +8,11 @@ const Main = () => {
     function moveLogin() {
         document.location.href="/login";
     }
+
+    function  moveSignUp() {
+        document.location.href="/signup";
+    }
+
     return (
         <div className="content">
             <table className = "tblCountryInfo">
@@ -44,8 +49,7 @@ const Main = () => {
                     <button type="button" className="btn1" onClick={moveLogin}>1</button>
                 </div>
                 <div>이미 회원이신가요? 로그인해서 미뤄둔 계획을 세워볼까요?</div>
-                <div><button type="button" className="btn2">2</button></div>
-                <div>{window.sessionStorage.id}</div>
+                <div><button type="button" className="btn2" onClick={moveSignUp}>2</button></div>
             </div>
         </div>
     );

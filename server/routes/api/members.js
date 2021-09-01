@@ -42,13 +42,21 @@ router.post('/auth', async (req, res) => {
 
 });
 
-router.get('/session',  (req, res) => {
+router.post('/signup',  (req, res) => {
+    let body = req.body;
+    const id = body.id;
+    const pw = body.pw;
 
-    // res.send(req.session.id);
-    // res.send(req.session.asdasdasd);
-    //
-    // delete req.session.id;
-    // res.send(req.session.id);
+    let query = "insert into user (id, pw) values ('"+id+"','"+pw+"')";
+    console.log(query);
+
+    connection.query(query, function (error, results, fields) {
+        if (error) {
+            console.log(error);
+        }
+        console.log(results);
+        res.send(results);
+    });
 
 });
 

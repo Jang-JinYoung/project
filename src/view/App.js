@@ -7,6 +7,7 @@ import Map from "./Map";
 import Login from "./Login";
 import Plan from "./Plan";
 import Calendar from "./Calendar";
+import SignUp from "./SignUp";
 
 // class App extends React.Component {
 //   constructor(props) {
@@ -54,6 +55,7 @@ function App() {
             <Route path="/login" component={Login} />
             <Route path="/plan" component={Plan} />
             <Route path="/cal" component={Calendar}/>
+            <Route path="/signup" component={SignUp}/>
       </div>
   );
 }

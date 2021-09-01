@@ -13,9 +13,14 @@ const Header = () => {
             return null;
         } else {
             console.log("웰");
-            return <div>환영합니다</div>;
+            return <div className="welcome">환영합니다 {id} 님 <button onClick={logout}>로그아웃</button></div>;
         }
         
+    }
+
+    const logout = () => {
+        window.sessionStorage.clear();
+        document.location.href = '/';
     }
 
     return (
