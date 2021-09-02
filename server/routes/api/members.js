@@ -48,8 +48,25 @@ router.post('/signup',  (req, res) => {
     const pw = body.pw;
 
     let query = "insert into user (id, pw) values ('"+id+"','"+pw+"')";
-    console.log(query);
+    // console.log(query);
 
+    connection.query(query, function (error, results, fields) {
+        if (error) {
+            console.log(error);
+        }
+        console.log(results);
+        res.send(results);
+    });
+
+});
+
+router.get('/checkDuplicate',  (req, res) => {
+
+    console.log(req.query);
+    const id = req.query.id;
+
+    let query = "select count(*) as cnt from user where id = '"+id+"'";
+    // console.log(query);
     connection.query(query, function (error, results, fields) {
         if (error) {
             console.log(error);

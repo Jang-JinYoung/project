@@ -11,7 +11,7 @@
     margin: auto;
 }
 
-.id, .pw {
+.id, .pw, .re_pw {
     margin-bottom: 5px;
     width: 50vh;
     height: 4vh;
