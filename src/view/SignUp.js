@@ -78,8 +78,9 @@ const SignUp = () => {
                     </span>
                     비밀번호<br/>
                     <input type="password" className="pw" onChange={handleChange} value={pw}/> <br/>
-                    비밀번호 확인<br/>
+                    비밀번호 재확인<br/>
                     <input type="password" className="re_pw" onChange={handleChange} value={re_pw}/> <br/>
+                    <div>ㅁㄴㅇㅁㄴㅇ</div>
                     <input type="submit" className="btn" value="회원가입"/>
                     {/*</fieldset>*/}
                 </form>
