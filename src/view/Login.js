@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 import "../css/login.css";
+import {Link} from "react-router-dom";
 
 
 class Login extends Component {
@@ -81,9 +82,11 @@ class Login extends Component {
                         {/*</fieldset>*/}
                     </form>
                     <div className="search1">
-                        <span onClick={this.moveSearch}>아이디 찾기</span>
+                        <Link to="/search" style={{color: 'inherit', textDecoration: 'inherit'}}>
+                        <span>아이디 찾기</span>
                         <span>&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;</span>
-                        <span onClick={this.moveSearch}>비밀번호 찾기</span>
+                        <span>비밀번호 찾기</span>
+                        </Link>
                     </div>
                 </div>
             </div>
