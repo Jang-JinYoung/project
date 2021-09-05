@@ -1,20 +1,9 @@
 var mysql      = require('mysql');
 var connection = mysql.createConnection({
-    host     : 'localhost',
-    user     : 'root',
-    password : 'wlsdud3301!',
-    database : 'nodejs'
+    host     : 'uws7-214.cafe24.com',
+    user     : 'jinyoung4892',
+    password : 'aa75287528!',
+    database : 'jinyoung4892'
 });
 
 module.exports = connection;
-// export.module = connection;
-// connection.connect();
-//
-// connection.query('SELECT * FROM user', function (error, results, fields) {
-//     if (error) {
-//         console.log(error);
-//     }
-//     console.log(results);
-// });
-//
-// connection.end();
