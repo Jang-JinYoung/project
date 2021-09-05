@@ -6,6 +6,4 @@ var connection = mysql.createConnection({
     database : ''
 });
 
-
-var test = "asdasdasd";
 module.exports = connection;
