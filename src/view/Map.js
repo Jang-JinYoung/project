@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import "../css/map.css"
-import {Map, GoogleApiWrapper} from "google-maps-react";
+import {Map, GoogleApiWrapper, Marker} from "google-maps-react";
 
 const api = require("../api");
 
@@ -9,15 +9,24 @@ class MapAPI extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            style:props
+            style:props,
+            lat : props.lat,
+            lng : props.lng
         };
     }
+
 
     componentDidMount() {
 
     }
 
+    onMarkerClick = (e) => {
+        console.log(e);
+    }
+
     render() {
+
+
         const {style} = this.state;
         const mapStyles = {
             position: 'relative',
@@ -30,8 +39,11 @@ class MapAPI extends Component {
                 google={this.props.google}
                 zoom={6}
                 style={mapStyles}
-                initialCenter={{lat:style.lat, lng:style.lng}}
-            />
+                initialCenter={{lat:this.props.lat, lng:this.props.lng}}
+            >
+                <Marker position={{lat:this.props.lat, lng:this.props.lng}} onClick={this.onMarkerClick}/>
+                <Marker position={{lat:this.props.lat, lng:12.5}} onClick={this.onMarkerClick}/>
+            </Map>
         );
     }
 }

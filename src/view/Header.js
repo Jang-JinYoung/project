@@ -9,10 +9,8 @@ const Header = () => {
         const id = window.sessionStorage.id;
 
         if(!id) {
-            console.log("컴");
             return null;
         } else {
-            console.log("웰");
             return <div className="welcome">환영합니다 {id} 님 <button onClick={logout}>로그아웃</button></div>;
         }
         

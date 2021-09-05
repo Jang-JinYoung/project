@@ -39,7 +39,7 @@ const Plan = () => {
                 </div>
             </div>
             <div className="map">
-                <GoogleApiWrapper width="100%" height="100%"/>
+                <GoogleApiWrapper width="100%" height="100%" lat={36.5} lng={127.7}/>
             </div>
         </div>
     );
