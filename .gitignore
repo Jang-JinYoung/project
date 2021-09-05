@@ -12,7 +12,7 @@
 /src/api.js
 
 # dbconfig
-./server/config/dbconfig.js
+/server/config/dbconfig.js
 
 # production
 /build
@@ -29,5 +29,5 @@ yarn-debug.log*
 yarn-error.log*
 
 
-//session
+#session
 ./server/.credentials.development.json
