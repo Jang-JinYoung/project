@@ -12,7 +12,7 @@
 /src/api.js
 
 # dbconfig
-/server/config/dbconfig.js
+./server/config/dbconfig.js
 
 # production
 /build
