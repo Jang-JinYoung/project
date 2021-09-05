@@ -1,44 +1,56 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import GoogleApiWrapper from "./Map";
 import  "../css/main.css";
 import '../css/section.css';
-import image from "../images/82.png";
 
 const Main = () => {
+
+    const [country, setCountry] = useState({});
+    // const {country_kr, country_eng, image_path} = country;
+
+    useEffect(() => {
+        fetch('http://localhost:3001/api/main/country')
+            .then(res=>res.json())
+            .then(data=> {
+                setCountry(data[0]);
+            });
+    }, []);
+
     function moveLogin() {
         document.location.href="/login";
     }
 
     function  moveSignUp() {
-        document.location.href="/signup";
+        // document.location.href="/signup";
+        console.log(country);
     }
+
 
     return (
         <div className="content">
             <table className = "tblCountryInfo">
                 <thead>
                     <tr>
-                        <td className="tdRecommend" colSpan="2">오늘의 여행지 <strong>대한민국</strong></td>
+                        <td className="tdRecommend" colSpan="2">오늘의 여행지 <strong>{country.country_kr}</strong></td>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
                         <td className="tdMap" colSpan="2">
                             <div className="map">
-                                <GoogleApiWrapper width="100%" height="100%"/>
+                                <GoogleApiWrapper width="100%" height="100%" lat={country.latitude} lng={country.longitude}/>
                             </div>
                         </td>
                     </tr>
                     <tr>
                         <td className="tdInfo1" rowSpan="2">
-                            <img className="image" src={image} alt="국기"/>
+                            <img src={country.image_path} alt="flag"/>
                         </td>
                         <td className="tdInfo2" colSpan="2">
-                            <div>Republic of Korea</div>
-                            <div>수도 : 서울</div>
-                            <div>언어 : 한국어</div>
-                            <div>인구 : 5,182만 1,669명</div>
-                            <div>종교 : 천주교, 기독교, 불교</div>
+                            <div>{country.continent}</div>
+                            <div>{country.country_eng}</div>
+                            <div>수도 : {country.capital}</div>
+                            <div>언어 : {country.language}</div>
                         </td>
                     </tr>
                 </tbody>

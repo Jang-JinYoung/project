@@ -25,7 +25,7 @@ const Header = () => {
 
     return (
         <header>
-            <div className="wrapper">
+            <div className="">
                 <h1><a href="/">Trip Planner</a></h1>
                 {login()}
                 <nav>

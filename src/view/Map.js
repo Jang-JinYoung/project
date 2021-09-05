@@ -30,7 +30,7 @@ class MapAPI extends Component {
                 google={this.props.google}
                 zoom={6}
                 style={mapStyles}
-                initialCenter={{lat:37.5, lng:127}}
+                initialCenter={{lat:style.lat, lng:style.lng}}
             />
         );
     }

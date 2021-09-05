@@ -1,7 +1,21 @@
+.content {
+}
 .searchBox {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
     width: 500px;
     height: 500px;
 }
+
+.logo {
+    text-align: center;
+    font-size: 30px;
+    color: #1C215B;
+    margin-bottom: 10px;
+}
+
 .menu_wrap {
     display: table;
     table-layout: fixed;
@@ -34,7 +48,7 @@ ol, ul {
 }
 
 
-.menu_id, .menu_ones, .menu_qr {
+.menu_search_id, .menu_search_pw {
     display: block;
     position: relative;
     height: 69px;
