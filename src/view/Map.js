@@ -9,34 +9,32 @@ class MapAPI extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            style:props,
-            country: props.country
+            markers : ""
         };
     }
 
-
     componentDidMount() {
-        console.log(this.props.country);
-    }
 
-    Markers = (e) => {
-        let ret = "";
-
-        for(let i=0; i<this.props.country.length; i++) {
-            ret = ret + <Marker key={i} positon={{lat:this.props.country[i].latitude, lng:this.props.country[i].longitude}} />
+        let markers = "";
+        
+        if(!this.props.country.length) {//단일값
+            markers = markers +
+                "<Marker positon={{lat:{this.props.country.latitude}, lng:{this.props.country.longitude}}} />";
+            this.setState({[markers] : markers});
+            console.log(this.props.markers);
+            console.log(markers);
+        } else {//어레이값
         }
-        console.log("ret : " + ret);
-        return ret;
+
     }
 
     render() {
 
-
         const {style} = this.state;
         const mapStyles = {
             position: 'relative',
-            width: style.width,
-            height: style.height,
+            width: this.props.width,
+            height: this.props.height,
         }
         return (
             <Map
@@ -46,7 +44,7 @@ class MapAPI extends Component {
                 style={mapStyles}
                 initialCenter={{lat:this.props.country.latitude, lng:this.props.country.longitude}}
             >
-                {this.Markers()}
+                {this.props.markers}
             </Map>
         );
     }
