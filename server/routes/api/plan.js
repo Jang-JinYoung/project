@@ -4,7 +4,7 @@ const connection = require('../../config/dbconfig.js');
 
 router.get('/countries',  (req, res) => {
 
-    const query = "select * from countryInfo";
+    const query = "select * from countryInfo where continent = '유럽'";
 
     connection.query(query, function (error, results, fields) {
         if (error) {

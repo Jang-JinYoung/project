@@ -10,18 +10,23 @@ class MapAPI extends Component {
         super(props);
         this.state = {
             style:props,
-            lat : props.lat,
-            lng : props.lng
+            country: props.country
         };
     }
 
 
     componentDidMount() {
-
+        console.log(this.props.country);
     }
 
-    onMarkerClick = (e) => {
-        console.log(e);
+    Markers = (e) => {
+        let ret = "";
+
+        for(let i=0; i<this.props.country.length; i++) {
+            ret = ret + <Marker key={i} positon={{lat:this.props.country[i].latitude, lng:this.props.country[i].longitude}} />
+        }
+        console.log("ret : " + ret);
+        return ret;
     }
 
     render() {
@@ -39,10 +44,9 @@ class MapAPI extends Component {
                 google={this.props.google}
                 zoom={6}
                 style={mapStyles}
-                initialCenter={{lat:this.props.lat, lng:this.props.lng}}
+                initialCenter={{lat:this.props.country.latitude, lng:this.props.country.longitude}}
             >
-                <Marker position={{lat:this.props.lat, lng:this.props.lng}} onClick={this.onMarkerClick}/>
-                <Marker position={{lat:this.props.lat, lng:12.5}} onClick={this.onMarkerClick}/>
+                {this.Markers()}
             </Map>
         );
     }

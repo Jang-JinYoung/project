@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import GoogleApiWrapper from "./Map";
 import "../css/plan.css";
 import Calendar from "./Calendar";
@@ -6,6 +6,16 @@ import Calendar from "./Calendar";
 const Plan = () => {
 
     const [elem, setElem] = useState([]);
+    const [country, setCountry] = useState([]);
+
+    useEffect(() => {
+        fetch('http://localhost:3001/api/plan/countries')
+            .then(res=>res.json())
+            .then(data=> {
+                setCountry(data);
+            });
+    }, []);
+
 
     function showCalendar() {
         var calendar = document.getElementById("calendar");
@@ -19,7 +29,7 @@ const Plan = () => {
 
     const selectDate = (d) => {
 
-        var date1 = document.getElementById(d);
+        // var date1 = document.getElementById(d);
         setElem([...elem, d]);
     }
 
@@ -39,7 +49,7 @@ const Plan = () => {
                 </div>
             </div>
             <div className="map">
-                <GoogleApiWrapper width="100%" height="100%" lat={36.5} lng={127.7}/>
+                <GoogleApiWrapper width="100%" height="100%" country={country}/>
             </div>
         </div>
     );

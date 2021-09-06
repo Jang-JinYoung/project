@@ -38,7 +38,7 @@ const Main = () => {
                     <tr>
                         <td className="tdMap" colSpan="2">
                             <div className="map">
-                                <GoogleApiWrapper width="100%" height="100%" lat={country.latitude} lng={country.longitude}/>
+                                <GoogleApiWrapper width="100%" height="100%" country={country}/>
                             </div>
                         </td>
                     </tr>
