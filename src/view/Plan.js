@@ -9,11 +9,15 @@ const Plan = () => {
     const [country, setCountry] = useState([]);
 
     useEffect(() => {
-        fetch('http://localhost:3001/api/plan/countries')
+        const result = fetch('http://localhost:3001/api/plan/countries')
             .then(res=>res.json())
             .then(data=> {
+                console.log(country);
                 setCountry(data);
             });
+
+        console.log(country);
+
     }, []);
 
 
@@ -33,26 +37,29 @@ const Plan = () => {
         setElem([...elem, d]);
     }
 
-    return (
-        <div className="container">
-            <div className="search">
-                <div className="selectDate">
-                    <div>
-                        <p onClick={showCalendar}>날짜선택</p>
+    if(country[0]) {
+        return (
+            <div className="container">
+                <div className="search">
+                    <div className="selectDate">
+                        <div>
+                            <p onClick={showCalendar}>날짜선택</p>
+                        </div>
+                        <div id="calendar" className="calendar">
+                            <Calendar function={selectDate}/>
+                        </div>
                     </div>
-                    <div id="calendar" className="calendar">
-                        <Calendar function={selectDate}/>
+                    <div className="plan">
+                        {elem.map(e => <div key={e}>{e}</div>)}
                     </div>
                 </div>
-                <div className="plan">
-                    {elem.map(e => <div key={e}>{e}</div>)}
+                <div className="map">
+                    <GoogleApiWrapper width="100%" height="100%" country={country}/>
                 </div>
             </div>
-            <div className="map">
-                <GoogleApiWrapper width="100%" height="100%" country={country}/>
-            </div>
-        </div>
-    );
+        );
+    } else
+        return <div>loading</div>
 };
 
 export default Plan;

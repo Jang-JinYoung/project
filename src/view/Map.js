@@ -4,47 +4,45 @@ import {Map, GoogleApiWrapper, Marker} from "google-maps-react";
 
 const api = require("../api");
 
-class MapAPI extends Component {
+class MapApi extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            markers : ""
+            country: this.props.country
         };
     }
 
     componentDidMount() {
+        console.log(this.props.country);
+    }
 
-        let markers = "";
-        
-        if(!this.props.country.length) {//단일값
-            markers = markers +
-                "<Marker positon={{lat:{this.props.country.latitude}, lng:{this.props.country.longitude}}} />";
-            this.setState({[markers] : markers});
-            console.log(this.props.markers);
-            console.log(markers);
-        } else {//어레이값
-        }
+    setMarkers ()  {
 
     }
 
     render() {
 
-        const {style} = this.state;
-        const mapStyles = {
+        const props = this.props;
+
+        const mapStyles = {//MapStyle
             position: 'relative',
             width: this.props.width,
-            height: this.props.height,
+            height: this.props.height
         }
+
         return (
             <Map
                 class = "map"
                 google={this.props.google}
                 zoom={6}
                 style={mapStyles}
-                initialCenter={{lat:this.props.country.latitude, lng:this.props.country.longitude}}
+                initialCenter={{
+                    lat:this.props.country[0].latitude,
+                    lng:this.props.country[0].longitude
+                }}
             >
-                {this.props.markers}
+                {this.setMarkers}
             </Map>
         );
     }
@@ -52,4 +50,4 @@ class MapAPI extends Component {
 
 export default GoogleApiWrapper({
     apiKey: api.googleAPI
-})(MapAPI);
+})(MapApi);
