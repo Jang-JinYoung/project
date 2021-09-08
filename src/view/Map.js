@@ -9,21 +9,24 @@ class MapApi extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            country: this.props.country
+            country: this.props.country,
+            stores : []
         };
+
+        this.markerClick = this.markerClick.bind(this);
     }
 
     componentDidMount() {
-        console.log(this.props.country);
+        // console.log(this.state.country);
     }
 
-    setMarkers ()  {
-
+    markerClick(e) {
+        // console.log(e);
     }
 
     render() {
 
-        const props = this.props;
+        const country = this.state.country;
 
         const mapStyles = {//MapStyle
             position: 'relative',
@@ -33,7 +36,6 @@ class MapApi extends Component {
 
         return (
             <Map
-                class = "map"
                 google={this.props.google}
                 zoom={6}
                 style={mapStyles}
@@ -42,8 +44,23 @@ class MapApi extends Component {
                     lng:this.props.country[0].longitude
                 }}
             >
-                {this.setMarkers}
+                {country.length !== 0 && country.map((e) => (
+                    // console.log(e)
+                    <Marker
+                        key={e.id}
+                        text={e.country_kr}
+                        position={{lat: e.latitude, lng: e.longitude}}
+                    />
+                ))}
             </Map>
+            // <Map
+            //     google={this.props.google}
+            //     zoom={10}
+            //     style={mapStyles}
+            //     onClick={this.addMarkers}
+            // >
+            //     {this.displayMarkers()}
+            // </Map>
         );
     }
 }

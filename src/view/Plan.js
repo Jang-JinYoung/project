@@ -9,14 +9,12 @@ const Plan = () => {
     const [country, setCountry] = useState([]);
 
     useEffect(() => {
-        const result = fetch('http://localhost:3001/api/plan/countries')
+        fetch('http://localhost:3001/api/plan/countries')
             .then(res=>res.json())
             .then(data=> {
-                console.log(country);
+                console.log(data);
                 setCountry(data);
             });
-
-        console.log(country);
 
     }, []);
 

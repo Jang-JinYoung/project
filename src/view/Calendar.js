@@ -57,6 +57,7 @@ const Calendar = (props) => {
                 </tr>
             );
         }
+        console.log(result);
         return result;
     }
     
@@ -70,7 +71,7 @@ const Calendar = (props) => {
             <table id="dateTable">
                 <thead>
                     <tr>
-                        <td onClick={e => props.function("asd")}>월</td>
+                        <td>월</td>
                         <td>화</td>
                         <td>수</td>
                         <td>목</td>
