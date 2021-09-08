@@ -21,7 +21,7 @@ class MapApi extends Component {
     }
 
     markerClick(e) {
-        // console.log(e);
+        alert(e.label);
     }
 
     render() {
@@ -48,8 +48,9 @@ class MapApi extends Component {
                     // console.log(e)
                     <Marker
                         key={e.id}
-                        text={e.country_kr}
                         position={{lat: e.latitude, lng: e.longitude}}
+                        label={e.country_kr}
+                        onClick={this.markerClick}
                     />
                 ))}
             </Map>
