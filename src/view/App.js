@@ -9,6 +9,7 @@ import Plan from "./Plan";
 import Calendar from "./Calendar";
 import SignUp from "./SignUp";
 import Search from "./Search";
+import Board from "./Board";
 
 // class App extends React.Component {
 //   constructor(props) {
@@ -58,6 +59,7 @@ function App() {
             <Route path="/cal" component={Calendar}/>
             <Route path="/signup" component={SignUp}/>
             <Route path="/search" component={Search}/>
+            <Route path="/board" component={Board}/>
       </div>
   );
 }

@@ -22,23 +22,15 @@ app.use(expressSession({
 //cors
 app.use(cors());
 
-
-
-
+//router
 app.use(bodyParser.json());
 app.use('/api/member', require('./routes/api/members'));
 app.use('/api/main', require('./routes/api/main'));
 app.use('/api/plan', require('./routes/api/plan'));
+app.use('/api/board', require('./routes/api/board'));
 
-// app.use('/', (req, res) => {
-//     res.json({username: 'bryan'})
-// });
-
-app.get('/', (req, res) => {
-
-    res.send("안녕");
-});
 
 app.listen(port, () => {
     console.log(`express is running on ${port}`);
-})
+});
+
