@@ -2,6 +2,9 @@ import React, {useEffect, useState} from 'react';
 import GoogleApiWrapper from "./Map";
 import  "../css/main.css";
 import '../css/section.css';
+import Header from "./Header";
+import styled from "styled-components";
+
 const Main = () => {
 
     const [country, setCountry] = useState([]);
@@ -25,45 +28,88 @@ const Main = () => {
             console.log(country[0]);
     }
 
+    //css
+    const Content = styled.div`
+        position: relative;
+        width: 100%;
+        height: 1000px;
+        top: 50px;
+        display: flex;
+        justify-content: space-around;
+        background-color : #F5F6F7;
+    `;
+
+    const CountryInfo = styled.table`
+        border-collapse:collapse;
+        border: 1px solid black;
+        margin-top: 50px;
+        width: 1000px;
+        height: 600px;
+    `
+
+    const Recommend = styled.td`
+        border:1px solid black;
+        height: 30px;
+    `;
+
+    const TdMap = styled.td`
+        margin: 0;
+        position: relative;
+        border:1px solid black;
+        height: 170px;
+    `;
+
+    const DivMap = styled.div`
+        position: relative;
+        margin: 0;
+        width: 100%;
+        height: 100%;
+    `;
+
+    const TdCountryFlag = styled.td`
+        border:1px solid black;
+        width: 250px;
+    `;
+
+    const TdCountryInfo = styled.td`
+        border:1px solid black;
+    `;
 
     if(country[0]) {
         return (
-            <div className="content">
-                <table className = "tblCountryInfo">
-                    <thead>
-                    <tr>
-                        <td className="tdRecommend" colSpan="2">오늘의 여행지 <strong>{country[0].country_kr}</strong></td>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td className="tdMap" colSpan="2">
-                            <div className="map">
-                                <GoogleApiWrapper width="100%" height="100%" country={country}/>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td className="tdInfo1" rowSpan="2">
-                            <img src={country[0].image_path} alt="flag"/>
-                        </td>
-                        <td className="tdInfo2" colSpan="2">
-                            <div>{country[0].continent}</div>
-                            <div>{country[0].country_eng}</div>
-                            <div>수도 : {country[0].capital}</div>
-                            <div>언어 : {country[0].language}</div>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
-                <div className="content2">
-                    <div>지금 회원가입하고 여행계획을 세워요!</div>
-                    <div>
-                        <button type="button" className="btn1" onClick={moveLogin}>1</button>
-                    </div>
-                    <div>이미 회원이신가요? 로그인해서 미뤄둔 계획을 세워볼까요?</div>
-                    <div><button type="button" className="btn2" onClick={moveSignUp}>2</button></div>
-                </div>
+            <div>
+                <Header/>
+                <Content>
+                    <CountryInfo>
+                        <thead>
+                            <tr>
+                                <Recommend colSpan="2">&lt;오늘의 여행지&gt; <strong>{country[0].country_kr}</strong></Recommend>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <TdMap rowSpan="2" colSpan="2">
+                                    <DivMap>
+                                        <GoogleApiWrapper width="100%" height="100%" country={country}/>
+                                    </DivMap>
+                                </TdMap>
+                            </tr>
+                            <tr>
+                            </tr>
+                            <tr>
+                                <TdCountryFlag>
+                                    <img src={country[0].image_path}  alt="flag"/>
+                                </TdCountryFlag>
+                                <TdCountryInfo>
+                                    <div>{country[0].continent}</div>
+                                    <div>{country[0].country_eng}</div>
+                                    <div>수도 : {country[0].capital}</div>
+                                    <div>언어 : {country[0].language}</div>
+                                </TdCountryInfo>
+                            </tr>
+                        </tbody>
+                    </CountryInfo>
+                </Content>
             </div>
         );
     } else

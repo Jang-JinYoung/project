@@ -1,25 +1,5 @@
-.content {
-    position: relative;
-    border: 1px solid black;
-    width: 100%;
-    /*height: 90%;*/
-    top: 100px;
-    display: flex;
-    justify-content: space-around;
-}
 
-.tblCountryInfo {
-    border-collapse:collapse;
-    border: 1px solid black;
-    /*margin-left: 200px;*/
-    /*margin: 0 auto;*/
-}
 
-.tdRecommend {
-    border:1px solid black;
-    width: 500px;
-    height: 30px;
-}
 
 .tdMap {
     position: relative;
@@ -28,10 +8,9 @@
 
 .map {
     position: relative;
-    padding-bottom: 500px;
-    margin-left: 40px;
     width: 100%;
     height: 100%;
+    margin-left: 50px;
 }
 
 .tdInfo1 {
