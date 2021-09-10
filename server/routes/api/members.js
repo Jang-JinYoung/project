@@ -24,8 +24,6 @@ router.post('/auth', async (req, res) => {
     const pw = body.pw;
 
     let query = "select count(*) as cnt from user where id='"+id+"' and pw='"+pw+"'";
-    console.log(query);
-
     connection.query(query, function (error, results, fields) {
         if (error) {
             console.log(error);
@@ -33,12 +31,6 @@ router.post('/auth', async (req, res) => {
         console.log(results);
         res.send(results);
     });
-
-
-    req.session.id = 'Anoymous';
-    console.log(req.session.id);
-
-
 
 });
 

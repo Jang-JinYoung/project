@@ -1,0 +1,36 @@
+
+-- 나라 Table
+create table countryInfo
+(
+    id int(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    country_kr varchar(100) null, -- 나라이름(한국어)
+    country_eng varchar(100) null, -- 나라이름(영어)
+    capital varchar(100) null, -- 수도
+    continent varchar(100) null, -- 대륙
+    latitude      varchar(100) null, -- 위도
+    longitude      varchar(100) null, -- 경도
+    language varchar(100) null, -- 언어
+    image_path varchar(300) null -- 국기 이미지 주소
+);
+
+-- 게시판 Table
+create table board
+(
+    id        int(10) auto_increment
+        primary key,
+    title     varchar(100)                       null,
+    writer    varchar(100)                       null,
+    country   varchar(100)                       null,
+    text      varchar(300)                       null,
+    writeDate datetime default CURRENT_TIMESTAMP null
+);
+
+-- 유저 Table
+create table user
+(
+    no        int(10) auto_increment
+        primary key,
+    id     varchar(100)                       null,
+    pw    varchar(100)                       null,
+    nickname   varchar(100)                       null
+);
