@@ -14,7 +14,6 @@ const Content = styled.div`
         top: 50px;
         display: flex;
         justify-content: center;
-        background-color : #F5F6F7;
     `;
 
 const CountryInfo = styled.table`
@@ -60,7 +59,7 @@ const Main = () => {
     const [country, setCountry] = useState([]);
 
     useEffect( () => {
-        fetch(api.serverAPI+"/country'")
+        fetch(api.serverAPI+"/main/country")
             .then(res=>res.json())
             .then(data=> {
                 setCountry(data);
