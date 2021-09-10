@@ -3,6 +3,7 @@ import axios from 'axios';
 import "../css/login.css";
 import {Link} from "react-router-dom";
 import styled from "styled-components";
+import api from "../api";
 
 //css 관리
 const Content = styled.div`
@@ -67,7 +68,7 @@ class Login extends Component {
         const auth = { id, pw };
         // console.log(auth);
 
-        axios.post('http://localhost:3001/api/member/auth', auth)
+        axios.post(api.serverAPI+"/member/auth", auth)
             .then(res => {
                 if(res.data[0].cnt >= 1) {
                     alert("로그인");
@@ -116,6 +117,7 @@ class Login extends Component {
                         <TextInput type="password" name="pw" onChange={this.handleChange} autoComplete='off' placeholder ="비밀번호"/><br/>
                         <SubmitButton type="submit" value="로그인"/>
                     </form>
+                    {this.loginFailure}
                     <SearchDiv>
                         <Link to="/search" style={{color: 'inherit', textDecoration: 'inherit'}}>
                             <span>아이디 찾기</span>
