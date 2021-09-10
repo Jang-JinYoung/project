@@ -60,7 +60,7 @@ const Main = () => {
     const [country, setCountry] = useState([]);
 
     useEffect( () => {
-        const result = fetch(api.serverAPI+"/country'")
+        fetch(api.serverAPI+"/country'")
             .then(res=>res.json())
             .then(data=> {
                 setCountry(data);
