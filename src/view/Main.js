@@ -68,7 +68,8 @@ const Main = () => {
 
     const TdCountryFlag = styled.td`
         border:1px solid black;
-        width: 250px;
+        width: 150px;
+        height: 150px;
     `;
 
     const TdCountryInfo = styled.td`

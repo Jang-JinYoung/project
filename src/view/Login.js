@@ -2,7 +2,44 @@ import React, {Component} from 'react';
 import axios from 'axios';
 import "../css/login.css";
 import {Link} from "react-router-dom";
+import styled from "styled-components";
 
+//css 관리
+const Content = styled.div`
+            position: relative;
+            display: flex;
+            // justify-content: center;
+            height: 930px;
+            background-color: #F5F6F7;
+        `;
+
+const LoginDiv = styled.div`
+            margin: auto;
+        `;
+
+const LogoDiv = styled.div`
+            text-align: center;
+            font-size: 30px;
+            color: #1C215B;
+            margin-bottom: 10px;
+        `;
+
+const TextInput = styled.input`
+            margin-bottom: 5px;
+            width: 50vh;
+            height: 4vh;
+            padding-left: 10px;
+        `;
+
+const SubmitButton = styled.input`
+            // height: 4vh;
+            background-color: #1C215B;
+            color: white;
+        `;
+
+const SearchDiv = styled.div`
+    text-align: center;
+`;
 
 class Login extends Component {
 
@@ -17,8 +54,9 @@ class Login extends Component {
 
     handleChange = e => {
         this.setState({
-            [e.target.className]: e.target.value
+            [e.target.name]: e.target.value
         });
+        console.log(this.state);
     };
 
    handleSubmit = e => {
@@ -28,7 +66,6 @@ class Login extends Component {
         const {id, pw} = this.state;
         const auth = { id, pw };
         // console.log(auth);
-
 
         axios.post('http://localhost:3001/api/member/auth', auth)
             .then(res => {
@@ -68,28 +105,27 @@ class Login extends Component {
         document.location.href = '/search';
     }
 
+
     render() {
+
         return (
-            <div className="container">
-                <div className="login">
-                    <form className="" onSubmit={this.handleSubmit}>
-                        {/*<fieldset className="login">*/}
-                            <div className="logo">Trip Planner</div>
-                            <input type="text" className="id" onChange={this.handleChange} placeholder="아이디"/> <br/>
-                            <input type="password" className="pw" onChange={this.handleChange} placeholder ="비밀번호"/> <br/>
-                            {this.loginFailure()}
-                            <input type="submit" className="btn" value="로그인"/>
-                        {/*</fieldset>*/}
+            <Content>
+                <LoginDiv>
+                    <form  onSubmit={this.handleSubmit}>
+                        <LogoDiv>Trip Planner</LogoDiv>
+                        <TextInput type="text"  name="id" onChange={this.handleChange} placeholder="아이디"/><br/>
+                        <TextInput type="password" name="pw" onChange={this.handleChange} placeholder ="비밀번호"/>
+                        <SubmitButton type="submit" className="btn" value="로그인"/>
                     </form>
-                    <div className="search1">
+                    <SearchDiv>
                         <Link to="/search" style={{color: 'inherit', textDecoration: 'inherit'}}>
-                        <span>아이디 찾기</span>
-                        <span>&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;</span>
-                        <span>비밀번호 찾기</span>
+                            <span>아이디 찾기</span>
+                            <span>&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                            <span>비밀번호 찾기</span>
                         </Link>
-                    </div>
-                </div>
-            </div>
+                    </SearchDiv>
+                </LoginDiv>
+            </Content>
         );
     }
 }
