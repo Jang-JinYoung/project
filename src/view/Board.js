@@ -8,7 +8,7 @@ const Content = styled.div`
         position: relative;
         width: 100%;
         height: 1000px;
-        top: 50px;
+        top: 55px;
         background-color : #DEE7EE;
     `;
 

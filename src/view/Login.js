@@ -6,36 +6,36 @@ import styled from "styled-components";
 
 //css 관리
 const Content = styled.div`
-            position: relative;
-            display: flex;
-            // justify-content: center;
-            height: 930px;
-            background-color: #F5F6F7;
-        `;
+    position: relative;
+    display: flex;
+    height: 930px;
+    background-color: #F5F6F7;
+`;
 
 const LoginDiv = styled.div`
-            margin: auto;
-        `;
+    margin: auto;
+`;
 
 const LogoDiv = styled.div`
-            text-align: center;
-            font-size: 30px;
-            color: #1C215B;
-            margin-bottom: 10px;
-        `;
+    text-align: center;
+    font-size: 30px;
+    color: #11A1C4;
+    margin-bottom: 10px;
+`;
 
 const TextInput = styled.input`
-            margin-bottom: 5px;
-            width: 50vh;
-            height: 4vh;
-            padding-left: 10px;
-        `;
+    margin-bottom: 5px;
+    width: 450px;
+    height: 4vh;
+    padding-left: 10px;
+`;
 
 const SubmitButton = styled.input`
-            // height: 4vh;
-            background-color: #1C215B;
-            color: white;
-        `;
+    background-color: #1C215B;
+    width: 100%;
+    height: 4vh;
+    color: white;
+`;
 
 const SearchDiv = styled.div`
     text-align: center;
@@ -112,9 +112,9 @@ class Login extends Component {
                 <LoginDiv>
                     <form  onSubmit={this.handleSubmit}>
                         <LogoDiv>Trip Planner</LogoDiv>
-                        <TextInput type="text"  name="id" onChange={this.handleChange} placeholder="아이디"/><br/>
-                        <TextInput type="password" name="pw" onChange={this.handleChange} placeholder ="비밀번호"/>
-                        <SubmitButton type="submit" className="btn" value="로그인"/>
+                        <TextInput type="text" name="id" onChange={this.handleChange} autoComplete='off' placeholder="아이디"/><br/>
+                        <TextInput type="password" name="pw" onChange={this.handleChange} autoComplete='off' placeholder ="비밀번호"/><br/>
+                        <SubmitButton type="submit" value="로그인"/>
                     </form>
                     <SearchDiv>
                         <Link to="/search" style={{color: 'inherit', textDecoration: 'inherit'}}>

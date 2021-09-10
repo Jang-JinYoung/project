@@ -12,7 +12,8 @@ const Content = styled.div`
         top: 55px;
         width: 100%;
         height: 820px;
-        background-color: #EAECED;
+        // background-color: #EAECED;
+        background-color: white;
         display: flex;
         justify-content: center;
     `;
@@ -46,17 +47,16 @@ const DivMap = styled.div`
     `;
 
 const TdCountryFlag = styled.td`
-        border-right:1px solid #9FA8AF;
+        border-right:1px solid #C7C7C7;
+        background-color: #FAFAFB;
         width: 300px;
-        // height: 150px;
+        height: 210px;
         text-align: center;
     `;
 
 const TdCountryInfo = styled.td`
         background-color: white;
     `;
-
-
 
 const Main = () => {
 
@@ -70,17 +70,6 @@ const Main = () => {
             });
     }, []);
 
-
-    function moveLogin() {
-        document.location.href="/login";
-    }
-
-    function  moveSignUp() {
-        // document.location.href="/signup";
-        if(country)
-            console.log(country[0]);
-    }
-
     if(country[0]) {
         return (
             <div>
@@ -89,7 +78,7 @@ const Main = () => {
                     <CountryInfo>
                         <thead>
                         <tr>
-                            <Recommend colSpan="2">&lt;오늘의 여행지&gt; <strong>{country[0].country_kr}</strong></Recommend>
+                            <Recommend colSpan="2">오늘의 여행지</Recommend>
                         </tr>
                         </thead>
                         <tbody>
