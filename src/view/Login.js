@@ -107,7 +107,6 @@ class Login extends Component {
 
 
     render() {
-
         return (
             <Content>
                 <LoginDiv>

@@ -30,6 +30,19 @@ router.get('/select',  (req, res) => {
 
 });
 
+router.post('/write', (req, res) => {
+
+    const query = "insert into board(title, writer, country, text) values (?, ?, ?, ?)";
+    const values = [req.body.title, req.body.writer, req.body.country, req.bdoy.text];
+
+    connection.query(query, values, function (error, results, fields) {
+        if (error) {
+            console.log(error);
+        }
+        res.send(results);
+    });
+
+});
 
 module.exports = router;
 

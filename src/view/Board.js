@@ -1,4 +1,6 @@
 import React, {useEffect, useState} from 'react';
+import Header from "./Header";
+import styled from "styled-components";
 
 const Board = () => {
 
@@ -58,7 +60,7 @@ const Board = () => {
             board.map(e => {
                 // console.log(e);
                 result = result.concat(
-                    <tr key={e}>
+                    <tr key={e} stlye={{height: "60px"}}>
                         <td key={e.id}>{e.id}</td>
                         <td key={e.title}>{e.title}</td>
                         <td key={e.writer}>{e.writer}</td>
@@ -72,57 +74,81 @@ const Board = () => {
         return result;
     }
 
+    //css
+    const Content = styled.div`
+        position: relative;
+        width: 100%;
+        height: 1000px;
+        // top: 100px;
+        background-color : #F5F6F7;
+    `;
+
+    const Board = styled.div`
+        // width: 750px;
+        // height: 1000px;
+        // align: center;
+        margin: 0 auto;
+        padding-top: 250px;
+    `;
+
+    const SelectNav = styled.div`
+        // display: flex;
+        // justify-content: space-around;
+    `;
+
+    const CountrySelect = styled.select`
+        width: 100px;
+        height: 30px;
+    `;
+
+    const ButtonSelect = styled.button`
+        width: 100px;
+        height: 50px;
+    `;
+
+    const BoardTable = styled.table`
+        
+    `;
+
+    const BoardButton = styled.div`
+        display: flex;
+        flex-direction: row-reverse;
+        width:100px;
+    `;
+
+    const CreateButton = styled.button`
+        width: 50px
+    `;
+
     return (
-        <div className="container">
-            <select onChange={(e) => clickSelect(e)} select={select} >
-                <option value="전체">전체</option>
-                {getOptions()}
-            </select>
-            <button onClick={test}>asdasdasdasdasd</button>
-            <table className="tblCountryInfo">
-                <thead>
+        <Content>
+            <Header/>
+            <Board>
+                <SelectNav>
+                    <CountrySelect onChange={(e) => clickSelect(e)} select={select}>
+                        <option value="전체">전체</option>
+                        {getOptions()}
+                    </CountrySelect>
+                    <ButtonSelect onClick={test}>검색</ButtonSelect>
+                </SelectNav>
+                <BoardTable>
+                    <thead>
                     <tr>
                         <td>번호</td>
                         <td>제목</td>
                         <td>작성자</td>
                         <td>작성날짜</td>
                     </tr>
-                </thead>
-                <tbody>
-                    {getBoards()}
-            {/*        <tr>*/}
-            {/*            <td>1</td>*/}
-            {/*            <td>여행 동행하실분 구합니다</td>*/}
-            {/*            <td>홍길동</td>*/}
-            {/*            <td>2019-09-09</td>*/}
-            {/*        </tr>*/}
-            {/*        <tr>*/}
-            {/*            <td>3</td>*/}
-            {/*            <td>여행 동행하실분 구합니다</td>*/}
-            {/*            <td>홍길동</td>*/}
-            {/*            <td>2019-09-09</td>*/}
-            {/*        </tr>*/}
-            {/*        <tr>*/}
-            {/*            <td>4</td>*/}
-            {/*            <td>여행 동행하실분 구합니다</td>*/}
-            {/*            <td>홍길동</td>*/}
-            {/*            <td>2019-09-09</td>*/}
-            {/*        </tr>*/}
-            {/*        <tr>*/}
-            {/*            <td>5</td>*/}
-            {/*            <td>여행 동행하실분 구합니다</td>*/}
-            {/*            <td>홍길동</td>*/}
-            {/*            <td>2019-09-09</td>*/}
-            {/*        </tr>*/}
-                    <tr>
-                        <td>1</td>
-                        <td>여행 동행하실분 구합니다</td>
-                        <td>홍길동</td>
-                        <td>2019-09-09</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+                    </thead>
+                    <tbody>
+                         {getBoards()}
+                    </tbody>
+                </BoardTable>
+                <BoardButton>
+                    <CreateButton>작성</CreateButton>
+                </BoardButton>
+            </Board>
+        </Content>
     );
 };
 

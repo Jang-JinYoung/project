@@ -10,6 +10,7 @@ import Calendar from "./Calendar";
 import SignUp from "./SignUp";
 import Search from "./Search";
 import Board from "./Board";
+import BoardWrite from "./BoardWrite";
 
 // class App extends React.Component {
 //   constructor(props) {
@@ -50,15 +51,16 @@ import Board from "./Board";
 function App() {
   return (
       <div>
-            <Route path="/" component={Main} exact/>
-            <Route path="/about" component={About} />
-            <Route path="/map" component={Map} />
-            <Route path="/login" component={Login} />
-            <Route path="/plan" component={Plan} />
-            <Route path="/cal" component={Calendar}/>
-            <Route path="/signup" component={SignUp}/>
-            <Route path="/search" component={Search}/>
-            <Route path="/board" component={Board}/>
+        <Route path="/" component={Main} exact/>
+        <Route path="/about" component={About} />
+        <Route path="/map" component={Map} />
+        <Route path="/login" component={Login} />
+        <Route path="/plan" component={Plan} />
+        <Route path="/cal" component={Calendar}/>
+        <Route path="/signup" component={SignUp}/>
+        <Route path="/search" component={Search}/>
+        <Route path="/board" component={Board}/>
+        <Route path="/write" component={BoardWrite}/>
       </div>
   );
 }

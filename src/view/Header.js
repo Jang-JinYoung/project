@@ -2,6 +2,49 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from "styled-components";
 
+const MainHeader = styled.div`
+        height: 100px; background-color: #F5F6F7; border: 1px solid #E5E5E5;
+        width: 100%; z-index: 9999; top: 0; left: 0;
+        display: flex; justify-content: space-evenly;
+    `;
+
+const Title = styled.h1`
+        color: #87E0EC;
+        line-height: 30px;
+    `;
+
+const MemberNav = styled.ul`
+        list-style: none;
+        display: flex;
+        justify-content: space-evenly;
+        text-align: center;
+    `;
+
+const MemberItem = styled.li`
+        display:inline-block; 
+        text-align:center;
+        padding-left: 10px;
+    `;
+
+const SubHeader = styled.div`
+        position: absolute;
+        top: 100px;
+        width: 100%;
+        height: 50px;
+        border: 1px solid #E5E5E5;
+        background-color : #F5F6F7;
+    `;
+
+const MenuNav = styled.ul`
+        list-style: none;
+        display: flex;
+        justify-content: space-evenly;
+    `;
+
+const MenuItem = styled.li`
+        font-size: 18px;
+    `;
+
 const Header = () => {
 
     const login = () => {
@@ -20,49 +63,6 @@ const Header = () => {
         window.sessionStorage.clear();
         document.location.href = '/';
     }
-
-    const MainHeader = styled.div`
-        height: 100px; background-color: #F5F6F7; border: 1px solid #E5E5E5;
-        width: 100%; z-index: 9999; top: 0; left: 0;
-        display: flex; justify-content: space-evenly;
-    `;
-
-    const Title = styled.h1`
-        color: #87E0EC;
-        line-height: 30px;
-    `;
-
-    const MemberNav = styled.ul`
-        list-style: none;
-        display: flex;
-        justify-content: space-evenly;
-        text-align: center;
-    `;
-
-    const MemberItem = styled.li`
-        display:inline-block; 
-        text-align:center;
-        padding-left: 10px;
-    `;
-
-    const SubHeader = styled.div`
-        position: absolute;
-        top: 100px;
-        width: 100%;
-        height: 50px;
-        border: 1px solid #E5E5E5;
-        background-color : #F5F6F7;
-    `;
-
-    const MenuNav = styled.ul`
-        list-style: none;
-        display: flex;
-        justify-content: space-evenly;
-    `;
-
-    const MenuItem = styled.li`
-        font-size: 18px;
-    `;
 
 
     return (
