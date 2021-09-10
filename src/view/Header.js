@@ -33,7 +33,7 @@ const SubHeader = styled.div`
         position: absolute;
         top: 100px;
         width: 100%;
-        height: 50px;
+        height: 55px;
         border: 1px solid #9FA8AF;
         background-color : #DEE7EE;
     `;

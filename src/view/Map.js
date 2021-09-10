@@ -45,7 +45,6 @@ class MapApi extends Component {
                 }}
             >
                 {country.length !== 0 && country.map((e) => (
-                    // console.log(e)
                     <Marker
                         key={e.id}
                         position={{lat: e.latitude, lng: e.longitude}}
@@ -54,14 +53,6 @@ class MapApi extends Component {
                     />
                 ))}
             </Map>
-            // <Map
-            //     google={this.props.google}
-            //     zoom={10}
-            //     style={mapStyles}
-            //     onClick={this.addMarkers}
-            // >
-            //     {this.displayMarkers()}
-            // </Map>
         );
     }
 }

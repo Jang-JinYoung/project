@@ -42,3 +42,12 @@
     background-color: #4CAF50;
     width: 100px;
 }
+
+
+table {
+    border-collapse: collapse;
+}
+
+tr, td {
+    border: 1px solid black;
+}

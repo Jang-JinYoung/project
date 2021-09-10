@@ -9,47 +9,51 @@ const api = require("../api");
 //css
 const Content = styled.div`
         position: relative;
+        top: 55px;
         width: 100%;
-        height: 1000px;
-        top: 50px;
+        height: 820px;
+        background-color: #EAECED;
         display: flex;
         justify-content: center;
     `;
 
 const CountryInfo = styled.table`
         border-collapse:collapse;
+        border: 1px solid #9FA8AF;
         margin-top: 50px;
         width: 1000px;
         height: 600px;
     `
 
 const Recommend = styled.td`
-        border:1px solid black;
+        // border-top:1px solid black;
+        // border-left:1px solid black;
+        // border-right:1px solid black;
         height: 30px;
+        text-align: center;
     `;
 
 const TdMap = styled.td`
-        margin: 0;
         position: relative;
-        border:1px solid black;
-        height: 170px;
+        height: 180px;
     `;
 
 const DivMap = styled.div`
         position: relative;
-        margin: 0;
+        margin: 0 auto;
         width: 100%;
         height: 100%;
     `;
 
 const TdCountryFlag = styled.td`
-        border:1px solid black;
-        width: 150px;
-        height: 150px;
+        border-right:1px solid #9FA8AF;
+        width: 300px;
+        // height: 150px;
+        text-align: center;
     `;
 
 const TdCountryInfo = styled.td`
-        border:1px solid black;
+        background-color: white;
     `;
 
 
@@ -84,9 +88,9 @@ const Main = () => {
                 <Content>
                     <CountryInfo>
                         <thead>
-                            <tr>
-                                <Recommend colSpan="2">&lt;오늘의 여행지&gt; <strong>{country[0].country_kr}</strong></Recommend>
-                            </tr>
+                        <tr>
+                            <Recommend colSpan="2">&lt;오늘의 여행지&gt; <strong>{country[0].country_kr}</strong></Recommend>
+                        </tr>
                         </thead>
                         <tbody>
                             <tr>
@@ -101,10 +105,11 @@ const Main = () => {
                             <tr>
                                 <TdCountryFlag>
                                     <img src={country[0].image_path}  alt="flag"/>
+                                    <div><strong>{country[0].country_kr}</strong></div>
+                                    <div style={{color: "#a0a0a0"}}>{country[0].country_eng}</div>
                                 </TdCountryFlag>
                                 <TdCountryInfo>
                                     <div>{country[0].continent}</div>
-                                    <div>{country[0].country_eng}</div>
                                     <div>수도 : {country[0].capital}</div>
                                     <div>언어 : {country[0].language}</div>
                                 </TdCountryInfo>
