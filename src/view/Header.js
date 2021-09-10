@@ -3,14 +3,15 @@ import { Link } from 'react-router-dom';
 import styled from "styled-components";
 
 const MainHeader = styled.div`
-        height: 100px; background-color: #F5F6F7; border: 1px solid #E5E5E5;
+        height: 100px; background-color: #DEE7EE; border: 1px solid #9FA8AF;
         width: 100%; z-index: 9999; top: 0; left: 0;
         display: flex; justify-content: space-evenly;
     `;
 
 const Title = styled.h1`
-        color: #87E0EC;
+        color: #11A1C4;
         line-height: 30px;
+        font-family: Georgia, Serif;
     `;
 
 const MemberNav = styled.ul`
@@ -24,6 +25,8 @@ const MemberItem = styled.li`
         display:inline-block; 
         text-align:center;
         padding-left: 10px;
+        padding-top: 25px;
+        font-family: Impact, Charcoal, Serif;
     `;
 
 const SubHeader = styled.div`
@@ -31,8 +34,8 @@ const SubHeader = styled.div`
         top: 100px;
         width: 100%;
         height: 50px;
-        border: 1px solid #E5E5E5;
-        background-color : #F5F6F7;
+        border: 1px solid #9FA8AF;
+        background-color : #DEE7EE;
     `;
 
 const MenuNav = styled.ul`

@@ -2,6 +2,79 @@ import React, {useEffect, useState} from 'react';
 import Header from "./Header";
 import styled from "styled-components";
 
+
+//css
+const Content = styled.div`
+        position: relative;
+        width: 100%;
+        height: 1000px;
+        top: 50px;
+        background-color : #DEE7EE;
+    `;
+
+const BoardDiv = styled.div`
+        width: 1000px;
+        height: 600px;
+        // display: flex;
+        // flex-direction: column;
+        // width: 1000px;
+    `;
+
+const SelectNav = styled.div`
+        // display: flex;
+        // justify-content: flex-end;
+    `;
+
+const CountrySelect = styled.select`
+        width: 100px;
+        height: 30px;
+    `;
+
+const ButtonSelect = styled.button`
+        width: 100px;
+        height: 50px;
+    `;
+
+const BoardTable = styled.table`
+        border-collapse:collapse;
+        // text-align: center;
+        // margin-left:auto; 
+        // margin-right:auto;
+    `;
+
+const Tr = styled.tr`
+        &:hover {
+            background: #F2F2F2;
+        }
+    `;
+
+const IdTd = styled.td`
+    border: 1px solid #9FA8AF;
+    width: 40px;
+    `;
+const TitleTd = styled.td`
+    border: 1px solid #9FA8AF;
+    width: 600px;
+    `;
+const WriterTd = styled.td`
+    border: 1px solid #9FA8AF;
+    width: 100px;
+    `;
+const DateTd = styled.td`
+    border: 1px solid #9FA8AF;
+    width: 220px;
+    `;
+
+const BoardButton = styled.div`
+        display: flex;
+        flex-direction: row-reverse;
+        width:100px;
+    `;
+
+const CreateButton = styled.button`
+        width: 50px
+    `;
+
 const Board = () => {
 
     const [board, setBoard] = useState([]);
@@ -9,7 +82,7 @@ const Board = () => {
     const [select, setSelect] = useState("전체");
 
     useEffect(() => {
-        fetch('http://localhost:3001/api/board/select')
+        fetch('http://54.180.104.208:3001/api/board/select')
             .then(res=>res.json())
             .then(data=> {
                 setOptions(data);
@@ -17,7 +90,7 @@ const Board = () => {
     }, []);
 
     useEffect(() => {
-        fetch('http://localhost:3001/api/board/')
+        fetch('http://54.180.104.208:3001/api/board/')
             .then(res=>res.json())
             .then(data=> {
                 console.log(data);
@@ -56,74 +129,32 @@ const Board = () => {
 
     function getBoards() {
         let result = [];
-        if(board) {
+        if(board.length > 0) {
             board.map(e => {
                 // console.log(e);
                 result = result.concat(
-                    <tr key={e} stlye={{height: "60px"}}>
-                        <td key={e.id}>{e.id}</td>
-                        <td key={e.title}>{e.title}</td>
-                        <td key={e.writer}>{e.writer}</td>
-                        <td key={e.writeDate}>{e.writeDate}</td>
-                    </tr>
+                    <Tr key={e}>
+                        <IdTd key={e.id}>{e.id}</IdTd>
+                        <TitleTd key={e.title}>{e.title}</TitleTd>
+                        <WriterTd key={e.writer}>{e.writer}</WriterTd>
+                        <DateTd key={e.writeDate}>{e.writeDate.substring(0, 10)} {e.writeDate.substring(11, 19)}</DateTd>
+                    </Tr>
                 );
             })
-        } else {
-            result = result.concat(<div>loading</div>);
+        } else if(board.length === 0){
+            result = result.concat(
+                <tr>
+                    <IdTd colSpan="4">아직 게시글이 없습니다.</IdTd>
+                </tr>);
         }
         return result;
     }
 
-    //css
-    const Content = styled.div`
-        position: relative;
-        width: 100%;
-        height: 1000px;
-        // top: 100px;
-        background-color : #F5F6F7;
-    `;
-
-    const Board = styled.div`
-        // width: 750px;
-        // height: 1000px;
-        // align: center;
-        margin: 0 auto;
-        padding-top: 250px;
-    `;
-
-    const SelectNav = styled.div`
-        // display: flex;
-        // justify-content: space-around;
-    `;
-
-    const CountrySelect = styled.select`
-        width: 100px;
-        height: 30px;
-    `;
-
-    const ButtonSelect = styled.button`
-        width: 100px;
-        height: 50px;
-    `;
-
-    const BoardTable = styled.table`
-        
-    `;
-
-    const BoardButton = styled.div`
-        display: flex;
-        flex-direction: row-reverse;
-        width:100px;
-    `;
-
-    const CreateButton = styled.button`
-        width: 50px
-    `;
-
     return (
-        <Content>
+        <div>
             <Header/>
-            <Board>
+            <Content>
+            <BoardDiv>
                 <SelectNav>
                     <CountrySelect onChange={(e) => clickSelect(e)} select={select}>
                         <option value="전체">전체</option>
@@ -134,10 +165,10 @@ const Board = () => {
                 <BoardTable>
                     <thead>
                     <tr>
-                        <td>번호</td>
-                        <td>제목</td>
-                        <td>작성자</td>
-                        <td>작성날짜</td>
+                        <IdTd>번호</IdTd>
+                        <TitleTd>제목</TitleTd>
+                        <WriterTd>작성자</WriterTd>
+                        <DateTd>작성일</DateTd>
                     </tr>
                     </thead>
                     <tbody>
@@ -147,8 +178,9 @@ const Board = () => {
                 <BoardButton>
                     <CreateButton>작성</CreateButton>
                 </BoardButton>
-            </Board>
+            </BoardDiv>
         </Content>
+        </div>
     );
 };
 

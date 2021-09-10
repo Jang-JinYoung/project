@@ -4,13 +4,63 @@ import  "../css/main.css";
 import '../css/section.css';
 import Header from "./Header";
 import styled from "styled-components";
+const api = require("../api");
+
+//css
+const Content = styled.div`
+        position: relative;
+        width: 100%;
+        height: 1000px;
+        top: 50px;
+        display: flex;
+        justify-content: center;
+        background-color : #F5F6F7;
+    `;
+
+const CountryInfo = styled.table`
+        border-collapse:collapse;
+        margin-top: 50px;
+        width: 1000px;
+        height: 600px;
+    `
+
+const Recommend = styled.td`
+        border:1px solid black;
+        height: 30px;
+    `;
+
+const TdMap = styled.td`
+        margin: 0;
+        position: relative;
+        border:1px solid black;
+        height: 170px;
+    `;
+
+const DivMap = styled.div`
+        position: relative;
+        margin: 0;
+        width: 100%;
+        height: 100%;
+    `;
+
+const TdCountryFlag = styled.td`
+        border:1px solid black;
+        width: 150px;
+        height: 150px;
+    `;
+
+const TdCountryInfo = styled.td`
+        border:1px solid black;
+    `;
+
+
 
 const Main = () => {
 
     const [country, setCountry] = useState([]);
 
     useEffect( () => {
-        const result = fetch('http://localhost:3001/api/main/country')
+        const result = fetch(api.serverAPI+"/country'")
             .then(res=>res.json())
             .then(data=> {
                 setCountry(data);
@@ -27,54 +77,6 @@ const Main = () => {
         if(country)
             console.log(country[0]);
     }
-
-    //css
-    const Content = styled.div`
-        position: relative;
-        width: 100%;
-        height: 1000px;
-        top: 50px;
-        display: flex;
-        justify-content: space-around;
-        background-color : #F5F6F7;
-    `;
-
-    const CountryInfo = styled.table`
-        border-collapse:collapse;
-        border: 1px solid black;
-        margin-top: 50px;
-        width: 1000px;
-        height: 600px;
-    `
-
-    const Recommend = styled.td`
-        border:1px solid black;
-        height: 30px;
-    `;
-
-    const TdMap = styled.td`
-        margin: 0;
-        position: relative;
-        border:1px solid black;
-        height: 170px;
-    `;
-
-    const DivMap = styled.div`
-        position: relative;
-        margin: 0;
-        width: 100%;
-        height: 100%;
-    `;
-
-    const TdCountryFlag = styled.td`
-        border:1px solid black;
-        width: 150px;
-        height: 150px;
-    `;
-
-    const TdCountryInfo = styled.td`
-        border:1px solid black;
-    `;
 
     if(country[0]) {
         return (

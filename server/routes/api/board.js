@@ -5,9 +5,8 @@ const connection = require('../../config/dbconfig.js');
 router.get('/',  (req, res) => {
 
     const country = req.query.country;
-    const query = (country === undefined) ? "select * from board" : "select * from board where country = '" + country + "'";
-
-
+    const query = (country === undefined || country === "전체") ? "select * from board" : "select * from board where country = '" + country + "'";
+    
     connection.query(query, function (error, results, fields) {
         if (error) {
             console.log(error);
