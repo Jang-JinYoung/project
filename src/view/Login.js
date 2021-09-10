@@ -57,7 +57,6 @@ class Login extends Component {
         this.setState({
             [e.target.name]: e.target.value
         });
-        console.log(this.state);
     };
 
    handleSubmit = e => {
@@ -66,7 +65,6 @@ class Login extends Component {
 
         const {id, pw} = this.state;
         const auth = { id, pw };
-        // console.log(auth);
 
         axios.post(api.serverAPI+"/member/auth", auth)
             .then(res => {
@@ -117,7 +115,7 @@ class Login extends Component {
                         <TextInput type="password" name="pw" onChange={this.handleChange} autoComplete='off' placeholder ="비밀번호"/><br/>
                         <SubmitButton type="submit" value="로그인"/>
                     </form>
-                    {this.loginFailure}
+                    {this.loginFailure()}
                     <SearchDiv>
                         <Link to="/search" style={{color: 'inherit', textDecoration: 'inherit'}}>
                             <span>아이디 찾기</span>
