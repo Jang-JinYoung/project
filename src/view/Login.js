@@ -69,10 +69,11 @@ class Login extends Component {
         axios.post(api.serverAPI+"/member/auth", auth)
             .then(res => {
                 if(res.data[0].cnt >= 1) {
-                    alert("로그인");
+                    // alert("로그인");
                     //세션처리
                     window.sessionStorage.setItem('id', auth.id);
-                    // document.location.href = '/';
+                    // window.sessionStorage.setItem('nickname', auth.nickname);
+                    document.location.href = '/';
                 } else {
                     console.log("로그인 실패");
                     this.setState({

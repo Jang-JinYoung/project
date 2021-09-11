@@ -105,6 +105,14 @@ const Main = () => {
                             </tr>
                         </tbody>
                     </CountryInfo>
+                    <br/>
+                    <table>
+                        <thead>
+                        <td>12312</td>
+                        <td>12312</td>
+                        <td>12312</td>
+                        </thead>
+                    </table>
                 </Content>
             </div>
         );

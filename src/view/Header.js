@@ -67,6 +67,37 @@ const Header = () => {
         document.location.href = '/';
     }
 
+    function loginTag() {
+
+        let result = [];
+
+        if(window.sessionStorage.id) {
+            result = result.concat(
+                <MemberItem key="login">
+                    <Link to="/" style={{color: 'inherit', textDecoration: 'inherit'}}>
+                        {window.sessionStorage.id} 님 환영합니다.
+                    </Link>
+                </MemberItem>
+            );
+        } else {
+            result = result.concat(
+                <MemberItem key="login">
+                    <Link to="/login" style={{color: 'inherit', textDecoration: 'inherit'}}><p>로그인</p></Link>
+                </MemberItem>
+            );
+
+            result = result.concat(
+                <MemberItem key="signup">
+                    <Link to="/signup" style={{color: 'inherit', textDecoration: 'inherit'}}><p>회원가입</p></Link>
+                </MemberItem>
+            );
+        }
+
+
+        console.log(window.sessionStorage.id);
+        return result;
+    }
+
 
     return (
         <div>
@@ -77,12 +108,13 @@ const Header = () => {
                     </Link>
                 </Title>
                 <MemberNav>
-                    <MemberItem>
-                        <Link to="/login" style={{color: 'inherit', textDecoration: 'inherit'}}><p>로그인</p></Link>
-                    </MemberItem>
-                    <MemberItem>
-                        <Link to="/login" style={{color: 'inherit', textDecoration: 'inherit'}}><p>회원가입</p></Link>
-                    </MemberItem>
+                    {loginTag()}
+                    {/*<MemberItem>*/}
+                    {/*    <Link to="/login" style={{color: 'inherit', textDecoration: 'inherit'}}><p>로그인</p></Link>*/}
+                    {/*</MemberItem>*/}
+                    {/*<MemberItem>*/}
+                    {/*    <Link to="/login" style={{color: 'inherit', textDecoration: 'inherit'}}><p>회원가입</p></Link>*/}
+                    {/*</MemberItem>*/}
                 </MemberNav>
             </MainHeader>
             <SubHeader>
