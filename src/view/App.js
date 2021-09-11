@@ -2,7 +2,6 @@ import React from 'react';
 import About from "./About";
 import Main from "./Main";
 import { Route } from 'react-router-dom';
-import Header from "./Header";
 import Map from "./Map";
 import Login from "./Login";
 import Plan from "./Plan";
@@ -51,16 +50,15 @@ import BoardWrite from "./BoardWrite";
 function App() {
   return (
       <div>
-        <Route path="/" component={Main} exact/>
-        <Route path="/about" component={About} />
-        <Route path="/map" component={Map} />
-        <Route path="/login" component={Login} />
-        <Route path="/plan" component={Plan} />
-        <Route path="/cal" component={Calendar}/>
-        <Route path="/signup" component={SignUp}/>
-        <Route path="/search" component={Search}/>
-        <Route path="/board" component={Board}/>
-        <Route path="/write" component={BoardWrite}/>
+          <Route path="/" component={Main} exact/>
+          <Route path="/about" component={About} />
+          <Route path="/map" component={Map} />
+          <Route path="/login" component={Login} />
+          <Route path="/signup" component={SignUp}/>
+          <Route path="/search" component={Search}/>
+          <Route path="/plan" component={Plan} />
+          <Route path="/cal" component={Calendar}/>
+          <Route path="/board" component={Board}/>
       </div>
   );
 }

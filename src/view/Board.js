@@ -1,6 +1,8 @@
 import React, {useEffect, useState} from 'react';
 import Header from "./Header";
 import styled from "styled-components";
+import api from "../api";
+import uuid from "react-uuid"
 
 
 //css
@@ -9,7 +11,9 @@ const Content = styled.div`
         width: 100%;
         height: 1000px;
         top: 55px;
-        background-color : #DEE7EE;
+        background-color : white;
+        display: flex;
+        justify-content: center;
     `;
 
 const BoardDiv = styled.div`
@@ -21,8 +25,10 @@ const BoardDiv = styled.div`
     `;
 
 const SelectNav = styled.div`
-        // display: flex;
-        // justify-content: flex-end;
+        // width: 500px;
+        display: flex;
+        justify-content: flex-end;
+        margin-bottom: 10px;
     `;
 
 const CountrySelect = styled.select`
@@ -31,15 +37,12 @@ const CountrySelect = styled.select`
     `;
 
 const ButtonSelect = styled.button`
-        width: 100px;
-        height: 50px;
+        width: 60px;
+        height: 30px;
     `;
 
 const BoardTable = styled.table`
         border-collapse:collapse;
-        // text-align: center;
-        // margin-left:auto; 
-        // margin-right:auto;
     `;
 
 const Tr = styled.tr`
@@ -51,10 +54,13 @@ const Tr = styled.tr`
 const IdTd = styled.td`
     border: 1px solid #9FA8AF;
     width: 40px;
+    height: 30px;
+    text-align: center;
     `;
 const TitleTd = styled.td`
     border: 1px solid #9FA8AF;
     width: 600px;
+    padding-left: 5px;
     `;
 const WriterTd = styled.td`
     border: 1px solid #9FA8AF;
@@ -82,7 +88,7 @@ const Board = () => {
     const [select, setSelect] = useState("전체");
 
     useEffect(() => {
-        fetch('http://54.180.104.208:3001/api/board/select')
+        fetch(api.serverAPI+"/board/select")
             .then(res=>res.json())
             .then(data=> {
                 setOptions(data);
@@ -90,10 +96,9 @@ const Board = () => {
     }, []);
 
     useEffect(() => {
-        fetch('http://54.180.104.208:3001/api/board/')
+        fetch(api.serverAPI+"/board")
             .then(res=>res.json())
             .then(data=> {
-                console.log(data);
                 setBoard(data);
             });
     }, []);
@@ -102,9 +107,9 @@ const Board = () => {
 
         let result = [];
         if(options) {
-            options.map(e => {
-                result = result.concat(<option key={e.id} value={e.country_kr}>{e.country_kr}</option>);
-            })
+            for(let i=0; i<options.length; i++) {
+                result = result.concat(<option key={options[i].id} value={options[i].country_kr}>{options[i].country_kr}</option>);
+            }
         } else {
             result = result.concat(<div>loading</div>);
         }
@@ -114,11 +119,12 @@ const Board = () => {
 
     const clickSelect = (e) => {
         setSelect(e.target.value);
+        // console.log(e.target.value);
     }
 
     function test() {
-        const url = "http://localhost:3001/api/board?country="+select;
-        console.log(url);
+        const url = api.serverAPI+"/board?country="+select;
+        // console.log(url);
         fetch(url)
             .then(res=>res.json())
             .then(data=> {
@@ -130,17 +136,18 @@ const Board = () => {
     function getBoards() {
         let result = [];
         if(board.length > 0) {
-            board.map(e => {
-                // console.log(e);
-                result = result.concat(
-                    <Tr key={e}>
-                        <IdTd key={e.id}>{e.id}</IdTd>
-                        <TitleTd key={e.title}>{e.title}</TitleTd>
-                        <WriterTd key={e.writer}>{e.writer}</WriterTd>
-                        <DateTd key={e.writeDate}>{e.writeDate.substring(0, 10)} {e.writeDate.substring(11, 19)}</DateTd>
-                    </Tr>
-                );
-            })
+                for(let i=0; i<board.length; i++) {
+                    const e = board[i];
+                    // console.log(uuid());
+                    result = result.concat(
+                        <Tr key={uuid()}>
+                            <IdTd key={uuid()}>{e.id}</IdTd>
+                            <TitleTd key={uuid()}>{e.title}</TitleTd>
+                            <WriterTd key={uuid()}>{e.writer}</WriterTd>
+                            <DateTd key={uuid()}>{e.writeDate.substring(0, 10)} {e.writeDate.substring(11, 19)}</DateTd>
+                        </Tr>
+                    );
+                }
         } else if(board.length === 0){
             result = result.concat(
                 <tr>
@@ -165,10 +172,10 @@ const Board = () => {
                 <BoardTable>
                     <thead>
                     <tr>
-                        <IdTd>번호</IdTd>
-                        <TitleTd>제목</TitleTd>
-                        <WriterTd>작성자</WriterTd>
-                        <DateTd>작성일</DateTd>
+                        <td>번호</td>
+                        <td>제목</td>
+                        <td>작성자</td>
+                        <td>작성일</td>
                     </tr>
                     </thead>
                     <tbody>

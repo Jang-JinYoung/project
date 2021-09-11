@@ -49,34 +49,23 @@ const MenuItem = styled.li`
     `;
 
 const Header = () => {
-
-    const login = () => {
-
-        const id = window.sessionStorage.id;
-
-        if(!id) {
-            return null;
-        } else {
-            return <div className="welcome">환영합니다 {id} 님 <button onClick={logout}>로그아웃</button></div>;
-        }
-        
-    }
-
+    
     const logout = () => {
         window.sessionStorage.clear();
         document.location.href = '/';
     }
 
+    //로그인
     function loginTag() {
-
         let result = [];
-
         if(window.sessionStorage.id) {
             result = result.concat(
                 <MemberItem key="login">
-                    <Link to="/" style={{color: 'inherit', textDecoration: 'inherit'}}>
                         {window.sessionStorage.id} 님 환영합니다.
-                    </Link>
+                    <div>
+                        <span onClick={message}>&nbsp;&nbsp;쪽지&nbsp;&nbsp;</span>
+                        <span onClick={userInfo}>개인정보</span>
+                    </div>
                 </MemberItem>
             );
         } else {
@@ -85,17 +74,21 @@ const Header = () => {
                     <Link to="/login" style={{color: 'inherit', textDecoration: 'inherit'}}><p>로그인</p></Link>
                 </MemberItem>
             );
-
             result = result.concat(
                 <MemberItem key="signup">
                     <Link to="/signup" style={{color: 'inherit', textDecoration: 'inherit'}}><p>회원가입</p></Link>
                 </MemberItem>
             );
         }
-
-
-        console.log(window.sessionStorage.id);
         return result;
+    }
+
+    function message() {
+
+    }
+
+    function userInfo() {
+
     }
 
 
@@ -109,12 +102,6 @@ const Header = () => {
                 </Title>
                 <MemberNav>
                     {loginTag()}
-                    {/*<MemberItem>*/}
-                    {/*    <Link to="/login" style={{color: 'inherit', textDecoration: 'inherit'}}><p>로그인</p></Link>*/}
-                    {/*</MemberItem>*/}
-                    {/*<MemberItem>*/}
-                    {/*    <Link to="/login" style={{color: 'inherit', textDecoration: 'inherit'}}><p>회원가입</p></Link>*/}
-                    {/*</MemberItem>*/}
                 </MemberNav>
             </MainHeader>
             <SubHeader>
