@@ -149,6 +149,7 @@ const Board = () => {
                     result = result.concat(
                         <Tr key={uuid()}>
                             <IdTd key={uuid()}>{e.rownum}</IdTd>
+                            <tr key={uuid()}>{e.countey}</tr>
                             <TitleTd key={uuid()}>{e.title}</TitleTd>
                             <WriterTd key={uuid()}>{e.writer}</WriterTd>
                             <DateTd key={uuid()}>{e.writeDate.substring(0, 10)} {e.writeDate.substring(11, 19)}</DateTd>
@@ -162,6 +163,13 @@ const Board = () => {
                 </tr>);
         }
         return result;
+    }
+
+
+    //페이지 이동
+    const movePage = (e) => {
+        console.log(e.target.innerHTML);
+        // document.location.href = '/board/1';
     }
 
     return (
@@ -180,6 +188,7 @@ const Board = () => {
                     <thead>
                     <tr style={{backgroundColor: "gray"}}>
                         <IdTd>번호</IdTd>
+                        <td>나라</td>
                         <TitleTd>제목</TitleTd>
                         <WriterTd style={{textAlign: "center"}}>작성자</WriterTd>
                         <DateTd>작성일</DateTd>
@@ -194,7 +203,7 @@ const Board = () => {
 
                     </div>
                     <div>
-                        <span>1 </span>
+                        <span onClick={(e) => movePage(e)} >1 </span>
                         <span>2 </span>
                         <span>3 </span>
                         <span>4 </span>

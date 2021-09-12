@@ -2,26 +2,30 @@ const express = require('express');
 const router = express.Router();
 const connection = require('../../config/dbconfig.js');
 
-router.get('/',  (req, res) => {
+router.get('/',  async (req, res) => {
 
+    let result = [];
     const country = req.query.country;
     let query =
         (country === undefined || country === "전체") ?
             "select @ROWNUM:=@ROWNUM+1 as rownum, a.* from board a, (select @ROWNUM:=0) R" :
             "select @ROWNUM:=@ROWNUM+1 as rownum, a.* from board a, (select @ROWNUM:=0) R where country = '" + country + "'";
 
-
-    // select @ROWNUM:=@ROWNUM+1 as rownum, a.*
-    // from board a, (select @ROWNUM:=0) R;
     query = query + " order by writeDate desc"
     
-    connection.query(query, function (error, results, fields) {
-        if (error) {
-            console.log(error);
-        }
-        res.send(results);
-    });
+    const data = await (new Promise(function(resolve) {
+        connection.query(query, function (error, results, fields) {
+            if (error) {
+                console.log(error);
+            }
+            resolve(results);
+            // res.send(results);
+        });
+    }));
 
+    result.push(data);
+
+    res.send(result);
 });
 
 router.get('/select',  (req, res) => {
