@@ -9,11 +9,12 @@ import uuid from "react-uuid"
 const Content = styled.div`
         position: relative;
         width: 100%;
-        height: 1000px;
+        height: 760px;
         top: 55px;
         background-color : white;
         display: flex;
         justify-content: center;
+        align-items: center;
     `;
 
 const BoardDiv = styled.div`
@@ -65,6 +66,7 @@ const TitleTd = styled.td`
 const WriterTd = styled.td`
     border: 1px solid #9FA8AF;
     width: 100px;
+    text-align: center;
     `;
 const DateTd = styled.td`
     border: 1px solid #9FA8AF;
@@ -73,8 +75,13 @@ const DateTd = styled.td`
 
 const BoardButton = styled.div`
         display: flex;
-        flex-direction: row-reverse;
-        width:100px;
+        // flex-direction: row-reverse;
+        align-items: center;
+        justify-content: space-around;
+        // flex-basis: 250px;
+       
+        width: 900px;
+        padding-top: 10px;
     `;
 
 const CreateButton = styled.button`
@@ -141,7 +148,7 @@ const Board = () => {
                     // console.log(uuid());
                     result = result.concat(
                         <Tr key={uuid()}>
-                            <IdTd key={uuid()}>{e.id}</IdTd>
+                            <IdTd key={uuid()}>{e.rownum}</IdTd>
                             <TitleTd key={uuid()}>{e.title}</TitleTd>
                             <WriterTd key={uuid()}>{e.writer}</WriterTd>
                             <DateTd key={uuid()}>{e.writeDate.substring(0, 10)} {e.writeDate.substring(11, 19)}</DateTd>
@@ -171,11 +178,11 @@ const Board = () => {
                 </SelectNav>
                 <BoardTable>
                     <thead>
-                    <tr>
-                        <td>번호</td>
-                        <td>제목</td>
-                        <td>작성자</td>
-                        <td>작성일</td>
+                    <tr style={{backgroundColor: "gray"}}>
+                        <IdTd>번호</IdTd>
+                        <TitleTd>제목</TitleTd>
+                        <WriterTd style={{textAlign: "center"}}>작성자</WriterTd>
+                        <DateTd>작성일</DateTd>
                     </tr>
                     </thead>
                     <tbody>
@@ -183,6 +190,15 @@ const Board = () => {
                     </tbody>
                 </BoardTable>
                 <BoardButton>
+                    <div>
+
+                    </div>
+                    <div>
+                        <span>1 </span>
+                        <span>2 </span>
+                        <span>3 </span>
+                        <span>4 </span>
+                    </div>
                     <CreateButton>작성</CreateButton>
                 </BoardButton>
             </BoardDiv>
