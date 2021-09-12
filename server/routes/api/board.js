@@ -5,7 +5,14 @@ const connection = require('../../config/dbconfig.js');
 router.get('/',  (req, res) => {
 
     const country = req.query.country;
-    let query = (country === undefined || country === "전체") ? "select * from board" : "select * from board where country = '" + country + "'";
+    let query =
+        (country === undefined || country === "전체") ?
+            "select @ROWNUM:=@ROWNUM+1 as rownum, a.* from board a, (select @ROWNUM:=0) R" :
+            "select @ROWNUM:=@ROWNUM+1 as rownum, a.* from board a, (select @ROWNUM:=0) R where country = '" + country + "'";
+
+
+    // select @ROWNUM:=@ROWNUM+1 as rownum, a.*
+    // from board a, (select @ROWNUM:=0) R;
     query = query + " order by writeDate desc"
     
     connection.query(query, function (error, results, fields) {
