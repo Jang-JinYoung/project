@@ -8,15 +8,20 @@ router.get('/',  async (req, res) => {
     const country = req.query.country;
     const page = req.query.page;
 
+    let begin = ((page-1)*10)+1;
+    let end = (page*10);
+
+    let values = [begin, end];
     let query =
         (country === undefined || country === "전체") ?
-            "select @ROWNUM:=@ROWNUM+1 as rownum, a.* from board a, (select @ROWNUM:=0) R" :
+            "select @ROWNUM:=@ROWNUM+1 as rownum, a.* from board a, (select @ROWNUM:=0) R " :
             "select @ROWNUM:=@ROWNUM+1 as rownum, a.* from board a, (select @ROWNUM:=0) R where country = '" + country + "'";
 
-    query = query + " order by writeDate desc"
+
+    query = query + " order by writeDate desc limit ?, ?"
     
     const data = await (new Promise(function(resolve) {
-        connection.query(query, function (error, results, fields) {
+        connection.query(query, values, function (error, results, fields) {
             if (error) {
                 console.log(error);
             }
