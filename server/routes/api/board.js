@@ -23,7 +23,7 @@ router.get('/',  async (req, res) => {
         });
     }));
 
-    result.push(data);
+    result.push(data.json);
 
     res.send(result);
 });

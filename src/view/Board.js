@@ -145,14 +145,13 @@ const Board = () => {
         if(board.length > 0) {
                 for(let i=0; i<board.length; i++) {
                     const e = board[i];
-                    // console.log(uuid());
                     result = result.concat(
-                        <Tr key={uuid()}>
-                            <IdTd key={uuid()}>{e.rownum}</IdTd>
-                            <tr key={uuid()}>{e.countey}</tr>
-                            <TitleTd key={uuid()}>{e.title}</TitleTd>
-                            <WriterTd key={uuid()}>{e.writer}</WriterTd>
-                            <DateTd key={uuid()}>{e.writeDate.substring(0, 10)} {e.writeDate.substring(11, 19)}</DateTd>
+                        <Tr key={(i*5)+1}>
+                            <IdTd key={(i*5)+2}>{e.rownum}</IdTd>
+                            <td key={(i*5)+3}>{e.countey}</td>
+                            <TitleTd key={(i*5)+4}>{e.title}</TitleTd>
+                            <WriterTd key={(i*5)+5}>{e.writer}</WriterTd>
+                            {/*<DateTd key={uuid()}>{e.writeDate.substring(0, 10)} {e.writeDate.substring(11, 19)}</DateTd>*/}
                         </Tr>
                     );
                 }
@@ -160,7 +159,7 @@ const Board = () => {
             result = result.concat(
                 <tr>
                     <IdTd colSpan="4">아직 게시글이 없습니다.</IdTd>
-                </tr>);
+                </tr>)
         }
         return result;
     }
@@ -168,7 +167,7 @@ const Board = () => {
 
     //페이지 이동
     const movePage = (e) => {
-        console.log(e.target.innerHTML);
+        // console.log(e.target.innerHTML);
         // document.location.href = '/board/1';
     }
 
