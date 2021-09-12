@@ -9,7 +9,6 @@ import Calendar from "./Calendar";
 import SignUp from "./SignUp";
 import Search from "./Search";
 import Board from "./Board";
-import BoardWrite from "./BoardWrite";
 
 // class App extends React.Component {
 //   constructor(props) {
@@ -58,7 +57,7 @@ function App() {
           <Route path="/search" component={Search}/>
           <Route path="/plan" component={Plan} />
           <Route path="/cal" component={Calendar}/>
-          <Route path="/board" component={Board}/>
+          <Route path="/board/:page" component={Board}/>
       </div>
   );
 }

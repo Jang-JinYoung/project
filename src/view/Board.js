@@ -3,6 +3,7 @@ import Header from "./Header";
 import styled from "styled-components";
 import api from "../api";
 import uuid from "react-uuid"
+import {matches} from "@testing-library/jest-dom/dist/utils";
 
 
 //css
@@ -58,6 +59,12 @@ const IdTd = styled.td`
     height: 30px;
     text-align: center;
     `;
+
+const CountryTd = styled.td`
+    border: 1px solid #9FA8AF;
+    width: 60px;
+    text-align: center;
+    `;
 const TitleTd = styled.td`
     border: 1px solid #9FA8AF;
     width: 600px;
@@ -88,11 +95,14 @@ const CreateButton = styled.button`
         width: 50px
     `;
 
-const Board = () => {
+const Board = (match) => {
 
     const [board, setBoard] = useState([]);
     const [options, setOptions] = useState([]);
     const [select, setSelect] = useState("전체");
+
+    const page = match.match.params.page;
+
 
     useEffect(() => {
         fetch(api.serverAPI+"/board/select")
@@ -103,10 +113,12 @@ const Board = () => {
     }, []);
 
     useEffect(() => {
-        fetch(api.serverAPI+"/board")
+        const url = api.serverAPI+"/board?page="+page+"&country="+select;
+        fetch(url)
             .then(res=>res.json())
             .then(data=> {
-                setBoard(data);
+                // console.log(data.board);
+                setBoard(data.board);
             });
     }, []);
 
@@ -148,10 +160,10 @@ const Board = () => {
                     result = result.concat(
                         <Tr key={(i*5)+1}>
                             <IdTd key={(i*5)+2}>{e.rownum}</IdTd>
-                            <td key={(i*5)+3}>{e.countey}</td>
+                            <CountryTd key={(i*5)+3}>{e.country}</CountryTd>
                             <TitleTd key={(i*5)+4}>{e.title}</TitleTd>
                             <WriterTd key={(i*5)+5}>{e.writer}</WriterTd>
-                            {/*<DateTd key={uuid()}>{e.writeDate.substring(0, 10)} {e.writeDate.substring(11, 19)}</DateTd>*/}
+                            <DateTd key={uuid()}>{e.writeDate.substring(0, 10)} {e.writeDate.substring(11, 19)}</DateTd>
                         </Tr>
                     );
                 }
@@ -187,7 +199,7 @@ const Board = () => {
                     <thead>
                     <tr style={{backgroundColor: "gray"}}>
                         <IdTd>번호</IdTd>
-                        <td>나라</td>
+                        <CountryTd>나라</CountryTd>
                         <TitleTd>제목</TitleTd>
                         <WriterTd style={{textAlign: "center"}}>작성자</WriterTd>
                         <DateTd>작성일</DateTd>

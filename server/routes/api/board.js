@@ -4,8 +4,10 @@ const connection = require('../../config/dbconfig.js');
 
 router.get('/',  async (req, res) => {
 
-    let result = [];
+    let result = {};
     const country = req.query.country;
+    const page = req.query.page;
+
     let query =
         (country === undefined || country === "전체") ?
             "select @ROWNUM:=@ROWNUM+1 as rownum, a.* from board a, (select @ROWNUM:=0) R" :
@@ -23,8 +25,7 @@ router.get('/',  async (req, res) => {
         });
     }));
 
-    result.push(data.json);
-
+    result['board'] = data;
     res.send(result);
 });
 

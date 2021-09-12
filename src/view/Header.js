@@ -113,7 +113,7 @@ const Header = () => {
                         <Link to="/" style={{color: 'inherit', textDecoration: 'inherit'}}>홈</Link>
                     </MenuItem>
                     <MenuItem>
-                        <Link to="/board" style={{color: 'inherit', textDecoration: 'inherit'}}>동행 찾기</Link>
+                        <Link to="/board/1" style={{color: 'inherit', textDecoration: 'inherit'}}>동행 찾기</Link>
                     </MenuItem>
                 </MenuNav>
             </SubHeader>
