@@ -16,10 +16,10 @@ router.get('/',  async (req, res) => {
         (country === undefined || country === "전체") ?
             "select @ROWNUM:=@ROWNUM+1 as rownum, a.* from board a, (select @ROWNUM:=0) R " :
             "select @ROWNUM:=@ROWNUM+1 as rownum, a.* from board a, (select @ROWNUM:=0) R where country = '" + country + "'";
-
-    query = query + " order by writeDate desc limit ?, ?";
     
-    //보드
+    query = query + " order by writeDate desc limit ?, ?";
+
+    //게시글
     const board = await (new Promise(function(resolve) {
         connection.query(query, values, function (error, results, fields) {
             if (error) {
@@ -37,6 +37,7 @@ router.get('/',  async (req, res) => {
             "select count(*)/10 as count from board" :
             "select count(*)/10 as count from board where country = '" + country + "'";
 
+    //페이징
     const paging = await (new Promise(function(resolve) {
         connection.query(query, values, function (error, results, fields) {
             if (error) {

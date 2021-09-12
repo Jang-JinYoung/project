@@ -113,12 +113,12 @@ const Board = (match) => {
 
     useEffect(() => {
         const url = api.serverAPI+"/board?page="+page+"&country="+select;
+        console.log(url);
         fetch(url)
             .then(res=>res.json())
             .then(data=> {
-                // console.log(data.board);
                 setBoard(data.board);
-                setPageCount(data.paging.count);
+                setPageCount(data.paging[0].count);
             });
     }, []);
 
@@ -142,12 +142,12 @@ const Board = (match) => {
     }
 
     function test() {
-        const url = api.serverAPI+"/board?country="+select;
-        // console.log(url);
+        const url = api.serverAPI+"/board?page=1&country="+select;
+        console.log(url);
         fetch(url)
             .then(res=>res.json())
             .then(data=> {
-                console.log(data);
+                // console.log(data);
                 setBoard(data);
             });
     }
@@ -155,18 +155,19 @@ const Board = (match) => {
     function getBoards() {
         let result = [];
         if(board.length > 0) {
-                for(let i=0; i<board.length; i++) {
-                    const e = board[i];
-                    result = result.concat(
-                        <Tr key={(i*5)+1}>
-                            <IdTd key={(i*5)+2}>{e.rownum}</IdTd>
-                            <CountryTd key={(i*5)+3}>{e.country}</CountryTd>
-                            <TitleTd key={(i*5)+4}>{e.title}</TitleTd>
-                            <WriterTd key={(i*5)+5}>{e.writer}</WriterTd>
-                            <DateTd key={uuid()}>{e.writeDate.substring(0, 10)} {e.writeDate.substring(11, 19)}</DateTd>
-                        </Tr>
-                    );
-                }
+            for(let i=0; i<board.length; i++) {
+                const e = board[i];
+                console.log(e);
+                result = result.concat(
+                    <Tr key={(i*5)+1}>
+                        <IdTd key={(i*5)+2}>{e.rownum}</IdTd>
+                        <CountryTd key={(i*5)+3}>{e.country}</CountryTd>
+                        <TitleTd key={(i*5)+4}>{e.title}</TitleTd>
+                        <WriterTd key={(i*5)+5}>{e.writer}</WriterTd>
+                        <DateTd key={uuid()}>{e.writeDate.substring(0, 10)} {e.writeDate.substring(11, 19)}</DateTd>
+                    </Tr>
+                );
+            }
         } else if(board.length === 0){
             result = result.concat(
                 <tr>
@@ -177,14 +178,13 @@ const Board = (match) => {
     }
 
     function paging() {
-
         let result = [];
-
-        for(let i=1; i<=setPageCount.length; i++) {
+        for(let i=1; i<=pageCount; i++) {
             result = result.concat(
-                <span key={i}>{i}</span>
+                <span key={i} onClick={(e) => movePage(e)}>{i} </span>
             )
         }
+        return result;
     }
 
 
@@ -226,10 +226,6 @@ const Board = (match) => {
 
                     </div>
                     <div>
-                        <span onClick={(e) => movePage(e)} >1 </span>
-                        <span onClick={(e) => movePage(e)}>2 </span>
-                        <span>3 </span>
-                        <span>4 </span>
                         {paging()}
                     </div>
                     <CreateButton>작성</CreateButton>
