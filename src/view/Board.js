@@ -3,7 +3,6 @@ import Header from "./Header";
 import styled from "styled-components";
 import api from "../api";
 import uuid from "react-uuid"
-import {matches} from "@testing-library/jest-dom/dist/utils";
 
 
 //css
@@ -62,7 +61,7 @@ const IdTd = styled.td`
 
 const CountryTd = styled.td`
     border: 1px solid #9FA8AF;
-    width: 60px;
+    width: 80px;
     text-align: center;
     `;
 const TitleTd = styled.td`
@@ -100,9 +99,9 @@ const Board = (match) => {
     const [board, setBoard] = useState([]);
     const [options, setOptions] = useState([]);
     const [select, setSelect] = useState("전체");
+    const [pageCount, setPageCount] = useState();
 
     const page = match.match.params.page;
-
 
     useEffect(() => {
         fetch(api.serverAPI+"/board/select")
@@ -119,6 +118,7 @@ const Board = (match) => {
             .then(data=> {
                 // console.log(data.board);
                 setBoard(data.board);
+                setPageCount(data.paging.count);
             });
     }, []);
 
@@ -176,11 +176,23 @@ const Board = (match) => {
         return result;
     }
 
+    function paging() {
+
+        let result = [];
+
+        for(let i=1; i<=setPageCount.length; i++) {
+            result = result.concat(
+                <span key={i}>{i}</span>
+            )
+        }
+    }
+
 
     //페이지 이동
     const movePage = (e) => {
         // console.log(e.target.innerHTML);
-        // document.location.href = '/board/1';
+        let page = e.target.innerHTML
+        document.location.href = '/board/'+page;
     }
 
     return (
@@ -215,9 +227,10 @@ const Board = (match) => {
                     </div>
                     <div>
                         <span onClick={(e) => movePage(e)} >1 </span>
-                        <span>2 </span>
+                        <span onClick={(e) => movePage(e)}>2 </span>
                         <span>3 </span>
                         <span>4 </span>
+                        {paging()}
                     </div>
                     <CreateButton>작성</CreateButton>
                 </BoardButton>
