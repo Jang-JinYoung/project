@@ -157,10 +157,9 @@ const Board = (match) => {
         if(board.length > 0) {
             for(let i=0; i<board.length; i++) {
                 const e = board[i];
-                // console.log(e);
                 result = result.concat(
                     <Tr key={(i*5)+1}>
-                        <IdTd key={(i*5)+2}>{e.rownum}</IdTd>
+                        <IdTd key={(i*5)+2}>{(page-1)*10+(e.rownum)}</IdTd>
                         <CountryTd key={(i*5)+3}>{e.country}</CountryTd>
                         <TitleTd key={(i*5)+4}>{e.title}</TitleTd>
                         <WriterTd key={(i*5)+5}>{e.writer}</WriterTd>
@@ -180,9 +179,9 @@ const Board = (match) => {
     //페이징
     function paging() {
         let result = [];
-        for(let i=1; i<=pageCount; i++) {
+        for(let i=0; i<pageCount; i++) {
             result = result.concat(
-                <span key={i} onClick={(e) => movePage(e)}>{i} </span>
+                <span key={i} onClick={(e) => movePage(e)}>{i+1}</span>
             )
         }
         return result;
@@ -196,9 +195,7 @@ const Board = (match) => {
     }
 
     const changeCountry = (e) => {
-        console.log(e);
         country = e.target.value;
-        console.log(country);
     }
 
     return (
