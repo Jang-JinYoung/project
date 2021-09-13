@@ -1,8 +1,10 @@
 import React, {useEffect, useState} from 'react';
+import queryStirng from 'query-string';
 import Header from "./Header";
 import styled from "styled-components";
 import api from "../api";
 import uuid from "react-uuid"
+import {queryByText} from "@testing-library/react";
 
 
 //css
@@ -96,13 +98,17 @@ const CreateButton = styled.button`
 
 const Board = (match) => {
 
+    // const { search } = match.location.search;
+    // console.log(match.location.search);
+
+    const queryObj = queryStirng.parse(match.location.search);
+    let {country, page} = queryObj;
+
     const [board, setBoard] = useState([]);
     const [options, setOptions] = useState([]);
-    const [select, setSelect] = useState("전체");
     const [pageCount, setPageCount] = useState();
 
-    const page = match.match.params.page;
-
+    //나라선택 메뉴
     useEffect(() => {
         fetch(api.serverAPI+"/board/select")
             .then(res=>res.json())
@@ -111,9 +117,10 @@ const Board = (match) => {
             });
     }, []);
 
+    //게시글 가져오기
     useEffect(() => {
-        const url = api.serverAPI+"/board?page="+page+"&country="+select;
-        console.log(url);
+        const url = api.serverAPI+"/board?country="+country+"&page="+page;
+        // console.log(url);
         fetch(url)
             .then(res=>res.json())
             .then(data=> {
@@ -122,42 +129,35 @@ const Board = (match) => {
             });
     }, []);
 
+    //나라선택 메뉴 리스트 만들기
     function getOptions() {
-
         let result = [];
         if(options) {
             for(let i=0; i<options.length; i++) {
-                result = result.concat(<option key={options[i].id} value={options[i].country_kr}>{options[i].country_kr}</option>);
+                result = result.concat(
+                    <option key={options[i].id} value={options[i].country_kr}>
+                        {options[i].country_kr}
+                    </option>
+                );
             }
         } else {
             result = result.concat(<div>loading</div>);
         }
-
         return result;
     }
 
-    const clickSelect = (e) => {
-        setSelect(e.target.value);
-        // console.log(e.target.value);
-    }
-
+    //검색
     function test() {
-        const url = api.serverAPI+"/board?page=1&country="+select;
-        console.log(url);
-        fetch(url)
-            .then(res=>res.json())
-            .then(data=> {
-                // console.log(data);
-                setBoard(data);
-            });
+        document.location.href = "/board?country="+country+"&page="+page;
     }
 
+    //게시글 세팅
     function getBoards() {
         let result = [];
         if(board.length > 0) {
             for(let i=0; i<board.length; i++) {
                 const e = board[i];
-                console.log(e);
+                // console.log(e);
                 result = result.concat(
                     <Tr key={(i*5)+1}>
                         <IdTd key={(i*5)+2}>{e.rownum}</IdTd>
@@ -177,6 +177,7 @@ const Board = (match) => {
         return result;
     }
 
+    //페이징
     function paging() {
         let result = [];
         for(let i=1; i<=pageCount; i++) {
@@ -187,12 +188,17 @@ const Board = (match) => {
         return result;
     }
 
-
     //페이지 이동
     const movePage = (e) => {
         // console.log(e.target.innerHTML);
         let page = e.target.innerHTML
-        document.location.href = '/board/'+page;
+        document.location.href = "/board?country="+country+"&page="+page;
+    }
+
+    const changeCountry = (e) => {
+        console.log(e);
+        country = e.target.value;
+        console.log(country);
     }
 
     return (
@@ -201,7 +207,7 @@ const Board = (match) => {
             <Content>
             <BoardDiv>
                 <SelectNav>
-                    <CountrySelect onChange={(e) => clickSelect(e)} select={select}>
+                    <CountrySelect onChange={(e)=>changeCountry(e)} select={country}>
                         <option value="전체">전체</option>
                         {getOptions()}
                     </CountrySelect>

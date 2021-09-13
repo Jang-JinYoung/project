@@ -49,7 +49,7 @@ import Board from "./Board";
 function App() {
   return (
       <div>
-          <Route path="/" component={Main} exact/>
+          {/*<Route path="/" component={Main} exact/>*/}
           <Route path="/about" component={About} />
           <Route path="/map" component={Map} />
           <Route path="/login" component={Login} />
@@ -57,7 +57,8 @@ function App() {
           <Route path="/search" component={Search}/>
           <Route path="/plan" component={Plan} />
           <Route path="/cal" component={Calendar}/>
-          <Route path="/board/:page" component={Board}/>
+          <Route path="/" component={Main} exact/>
+          <Route path="/board" component={Board}/>
       </div>
   );
 }
