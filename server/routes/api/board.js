@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const connection = require('../../config/dbconfig.js');
 
-router.get('/',  async (req, res) => {
+router.get('/boardList',  async (req, res) => {
 
     let result = {};
     const country = req.query.country;
@@ -68,14 +68,21 @@ router.get('/',  async (req, res) => {
 
 router.get('/select',  (req, res) => {
 
-    const query = "select id, country_kr from countryInfo where continent ='유럽' order by country_kr asc";
+    const country = req.query.country;
+    const query = "select id, country_kr from countryInfo where continent ='유럽' and country_kr != ? order by country_kr asc";
 
-    connection.query(query, function (error, results, fields) {
+    const values = [country];
+
+    connection.query(query, values, function (error, results, fields) {
         if (error) {
             console.log(error);
         }
         res.send(results);
     });
+
+});
+
+router.get('/boardDetail', (req, res) => {
 
 });
 

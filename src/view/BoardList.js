@@ -1,12 +1,9 @@
 import React, {useEffect, useState} from 'react';
 import queryStirng from 'query-string';
-import Header from "./Header";
 import styled from "styled-components";
 import api from "../api";
 import uuid from "react-uuid"
-import {queryByText} from "@testing-library/react";
-import {Link, Route} from "react-router-dom";
-import BoardWrite from "./BoardWrite";
+import {Link} from "react-router-dom";
 
 
 //css
@@ -81,6 +78,7 @@ const WriterTd = styled.td`
 const DateTd = styled.td`
     border: 1px solid #9FA8AF;
     width: 220px;
+    text-align: center;
     `;
 
 const BoardButton = styled.div`
@@ -112,7 +110,7 @@ const BoardList = (match) => {
 
     //나라선택 메뉴
     useEffect(() => {
-        fetch(api.serverAPI+"/board/select")
+        fetch(api.serverAPI+"/board/select?country="+ country)
             .then(res=>res.json())
             .then(data=> {
                 setOptions(data);
@@ -121,7 +119,7 @@ const BoardList = (match) => {
 
     //게시글 가져오기
     useEffect(() => {
-        const url = api.serverAPI+"/board?country="+country+"&page="+page;
+        const url = api.serverAPI+"/board/boardList?country="+country+"&page="+page;
         // console.log(url);
         fetch(url)
             .then(res=>res.json())
@@ -135,6 +133,7 @@ const BoardList = (match) => {
     function getOptions() {
         let result = [];
         if(options) {
+
             for(let i=0; i<options.length; i++) {
                 result = result.concat(
                     <option key={options[i].id} value={options[i].country_kr}>
@@ -166,7 +165,7 @@ const BoardList = (match) => {
                         <CountryTd key={(i*5)+3}>{e.country}</CountryTd>
                         <TitleTd key={(i*5)+4}><Link to={link} style={{color: 'inherit', textDecoration: 'inherit'}}>{e.title}</Link></TitleTd>
                         <WriterTd key={(i*5)+5}>{e.writer}</WriterTd>
-                        <DateTd key={uuid()}>{e.writeDate.substring(0, 10)} {e.writeDate.substring(11, 19)}</DateTd>
+                        <DateTd key={uuid()}>{e.writeDate}</DateTd>
                     </Tr>
                 );
             }
@@ -198,7 +197,9 @@ const BoardList = (match) => {
     }
 
     const changeCountry = (e) => {
+        console.log(e.target.value);
         country = e.target.value;
+        console.log(country);
     }
 
     return (
