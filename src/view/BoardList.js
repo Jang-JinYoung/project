@@ -131,16 +131,12 @@ const BoardList = (match) => {
 
     //나라선택 메뉴 리스트 만들기
     function getOptions() {
-
-        console.log("test");
         let result = [];
-        // let id = 0;
-        // let country_kr = "전체";
-        // let option = {id, country_kr};
         if(options) {
-            // options.unshift(option);
+
             for(let i=0; i<options.length; i++) {
-                // console.log(options[i]);
+                console.log(country === options[i].country_kr);
+                console.log(country + " " + options[i].country_kr);
                 if(country === options[i].country_kr) {
                     result = result.concat(
                         <option key={options[i].id} value={options[i].country_kr} selected>
@@ -220,8 +216,6 @@ const BoardList = (match) => {
             <BoardDiv>
                 <SelectNav>
                     <CountrySelect onChange={(e)=>changeCountry(e)}>
-                        <option value="전체">전체</option>
-                        <option value="전체" selected>테스,트</option>
                         {getOptions()}
                     </CountrySelect>
                     <ButtonSelect onClick={test}>검색</ButtonSelect>
