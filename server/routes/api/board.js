@@ -107,7 +107,7 @@ router.get('/boardDetail', async (req, res) => {
     console.log(board);
     result['board'] = board;
 
-    res.send(board);
+    res.send(result);
 
 });
 

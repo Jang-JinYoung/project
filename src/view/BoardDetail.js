@@ -39,7 +39,7 @@ const BoardDetail = (match) => {
         fetch(api.serverAPI+"/board/boardDetail?id="+id)
             .then(res=>res.json())
             .then(data=> {
-                setBoard(data.board);
+                setBoard(data);
             });
     }, []);
 
