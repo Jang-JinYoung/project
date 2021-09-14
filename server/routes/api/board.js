@@ -15,6 +15,8 @@ function editWriteTime(board) {
 
         board[i].writeDate = date[0] + " " + date[1];
     }
+
+    return board;
 }
 
 router.get('/boardList',  async (req, res) => {
