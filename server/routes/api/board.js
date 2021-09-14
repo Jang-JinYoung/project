@@ -2,6 +2,21 @@ const express = require('express');
 const router = express.Router();
 const connection = require('../../config/dbconfig.js');
 
+//작성시간수정함수
+function editWriteTime(board) {
+    for(let i=0; i<board.length; i++) {
+        let writeDate = JSON.stringify(board[i].writeDate);
+        let date = writeDate.split('T');
+
+        date[0] = date[0].substring(3);
+        date[0] = date[0].replace(/-/gi, '.');
+
+        date[1] = date[1].substring(0, 5);
+
+        board[i].writeDate = date[0] + " " + date[1];
+    }
+}
+
 router.get('/boardList',  async (req, res) => {
 
     let result = {};
@@ -20,7 +35,7 @@ router.get('/boardList',  async (req, res) => {
     query = query + " order by writeDate desc limit ?, ?";
 
     //게시글
-    const board = await (new Promise(function(resolve) {
+    let board = await (new Promise(function(resolve) {
         connection.query(query, values, function (error, results, fields) {
             if (error) {
                 console.log(error);
@@ -30,18 +45,7 @@ router.get('/boardList',  async (req, res) => {
         });
     }));
 
-    for(let i=0; i<board.length; i++) {
-        let writeDate = JSON.stringify(board[i].writeDate);
-        let date = writeDate.split('T');
-
-        date[0] = date[0].substring(3);
-        date[0] = date[0].replace(/-/gi, '.');
-
-        date[1] = date[1].substring(0, 5);
-
-        board[i].writeDate = date[0] + " " + date[1];
-
-    }
+    board = editWriteTime(board);
     result['board'] = board;
 
     query =
@@ -81,29 +85,45 @@ router.get('/select',  (req, res) => {
 
 });
 
-router.get('/boardDetail', (req, res) => {
+router.get('/boardDetail', async (req, res) => {
 
+    let result = {};
     const id = req.query.id;
     const query = "select * from board where id = " + id;
-    connection.query(query, function (error, results, fields) {
-        if (error) {
-            console.log(error);
-        }
-        res.send(results);
-    });
+
+
+    let board = await (new Promise(function(resolve) {
+        connection.query(query, function (error, results, fields) {
+            if (error) {
+                console.log(error);
+            }
+            resolve(results);
+        });
+    }));
+
+    board = editWriteTime(board);
+    result['board'] = board;
+
+
 });
 
-router.post('/write', (req, res) => {
+router.post('/write', async (req, res) => {
+
 
     const query = "insert into board(title, writer, country, text) values (?, ?, ?, ?)";
     const values = [req.body.title, req.body.writer, req.body.country, req.bdoy.text];
 
-    connection.query(query, values, function (error, results, fields) {
-        if (error) {
-            console.log(error);
-        }
-        res.send(results);
-    });
+    const board = await (new Promise(function(resolve) {
+        connection.query(query, values, function (error, results, fields) {
+            if (error) {
+                console.log(error);
+            }
+            resolve(results);
+        });
+    }));
+
+
+
 
 });
 
