@@ -1,12 +1,40 @@
+import {useEffect} from "react";
+import api from "../api";
 
 
 const BoardDetail = (match) => {
 
-    console.log(match.match.params.id);
+    const id = match.match.params.id;
+    const [board, setBoard] = useEffect({});
+
+    //글내용 가져오기
+    useEffect(() => {
+        fetch(api.serverAPI+"/board/boardDetail?id="+id)
+            .then(res=>res.json())
+            .then(data=> {
+                setBoard(data);
+            });
+    }, []);
 
     return(
       <div>
-          loading
+          {board.id}
+          {board.id}
+          {board.id}
+          {board.id}
+          {board.id}
+          {board.id}
+          {board.id}
+          {board.id}
+          {board.id}
+          {board.id}
+          {board.id}
+          {board.id}
+          {board.id}
+          {board.id}
+          {board.id}
+          {board.id}
+          {board.id}
       </div>
     );
 }

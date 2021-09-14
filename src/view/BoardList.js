@@ -110,7 +110,7 @@ const BoardList = (match) => {
 
     //나라선택 메뉴
     useEffect(() => {
-        fetch(api.serverAPI+"/board/select?country="+ country)
+        fetch(api.serverAPI+"/board/select")
             .then(res=>res.json())
             .then(data=> {
                 setOptions(data);
@@ -135,8 +135,6 @@ const BoardList = (match) => {
         if(options) {
 
             for(let i=0; i<options.length; i++) {
-                console.log(country === options[i].country_kr);
-                console.log(country + " " + options[i].country_kr);
                 if(country === options[i].country_kr) {
                     result = result.concat(
                         <option key={options[i].id} value={options[i].country_kr} selected>

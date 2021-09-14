@@ -66,7 +66,6 @@ router.get('/boardList',  async (req, res) => {
 
 router.get('/select',  (req, res) => {
 
-    const country = req.query.country;
     const query = "select id, country_kr from countryInfo where continent ='유럽' order by country_kr asc";
 
     connection.query(query, function (error, results, fields) {
@@ -84,6 +83,14 @@ router.get('/select',  (req, res) => {
 
 router.get('/boardDetail', (req, res) => {
 
+    const id = req.query.id;
+    const query = "select * from board where id = " + id;
+    connection.query(query, function (error, results, fields) {
+        if (error) {
+            console.log(error);
+        }
+        res.send(results);
+    });
 });
 
 router.post('/write', (req, res) => {
