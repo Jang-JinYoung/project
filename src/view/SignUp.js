@@ -107,8 +107,10 @@ const SignUp = () => {
         } else {
             axios.post(serverAPI+"/member/signup", elem)
             .then(res => {
-                console.log("회원가입");
-                window.document.href="/";
+                alert("회원가입이 완료되었습니다.");
+                window.sessionStorage.setItem('id', res.data[0].no);
+                window.sessionStorage.setItem('nickname', res.data[0].nickname);
+                document.location.href = '/';
             })
             .catch(err => {
                 console.error(err);

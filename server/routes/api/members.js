@@ -20,7 +20,7 @@ router.post('/auth', async (req, res) => {
     const id = body.id;
     const pw = body.pw;
 
-    let query = "select count(*) as cnt from user where id='"+id+"' and pw='"+pw+"'";
+    let query = "select count(*) as cnt, * from user where id='"+id+"' and pw='"+pw+"'";
     connection.query(query, function (error, results, fields) {
         if (error) {
             console.log(error);

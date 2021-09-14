@@ -58,10 +58,10 @@ const Header = () => {
     //로그인
     function loginTag() {
         let result = [];
-        if(window.sessionStorage.id) {
+        if(window.sessionStorage.no) {
             result = result.concat(
                 <MemberItem key="login">
-                        {window.sessionStorage.id} 님 환영합니다.
+                        {window.sessionStorage.nickname} 님 환영합니다.
                     <div>
                         <span onClick={message}>&nbsp;&nbsp;쪽지&nbsp;&nbsp;</span>
                         <span onClick={userInfo}>개인정보</span>
