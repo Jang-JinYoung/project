@@ -14,13 +14,13 @@ router.get('/',  (req, res) => {
 });
 
 //로그인
-router.post('/auth', async (req, res) => {
+router.post('/auth',  (req, res) => {
 
     let body = req.body;
     const id = body.id;
     const pw = body.pw;
 
-    let query = "select count(*) as cnt, * from user where id='"+id+"' and pw='"+pw+"'";
+    let query = "select count(*) as cnt, a.* from user a where id='"+id+"' and pw='"+pw+"'";
     connection.query(query, function (error, results, fields) {
         if (error) {
             console.log(error);
@@ -37,14 +37,19 @@ router.post('/signup',  (req, res) => {
     const pw = body.pw;
     const nickname = body.nickname;
 
-    const values = [id, pw, nickname];
+    let values = [id, pw, nickname];
     let query = "insert into user (id, pw, nickname) values (?, ?, ?)";
     connection.query(query, values, function (error, results, fields) {
         if (error) {
             console.log(error);
         }
-        // console.log(results);
-        res.send(results);
+        query = "select * from user where id = ? and pw = ?";
+        connection.query(query, values, function (error, results, fields) {
+            if (error) {
+                console.log(error);
+            }
+        }
+        
     });
 
 });

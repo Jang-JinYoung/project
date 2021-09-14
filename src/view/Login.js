@@ -61,15 +61,17 @@ class Login extends Component {
 
    handleSubmit = e => {
         //페이지 이동 막아줌
-        e.preventDefault();
+        // e.preventDefault();
 
         const {id, pw} = this.state;
         const auth = { id, pw };
 
-        axios.post(api.serverAPI+"/member/auth", auth)
+        // axios.post(api.serverAPI+"/member/auth", auth)
+        axios.post("http://localhost:3001/api/member/auth", auth)
             .then(res => {
                 if(res.data[0].cnt >= 1) {
-                    window.sessionStorage.setItem('id', res.data[0].no);
+                    // console.log(res.data[0].no);
+                    window.sessionStorage.setItem('no', res.data[0].no);
                     window.sessionStorage.setItem('nickname', res.data[0].nickname);
                     document.location.href = '/';
                 } else {

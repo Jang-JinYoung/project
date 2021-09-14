@@ -91,7 +91,7 @@ const SignUp = () => {
         });
 
         if(name === "id") {
-            console.log("test");
+            // console.log("test");
             setBtnDisabled(false);
         }
         // console.log(elem);
@@ -108,7 +108,7 @@ const SignUp = () => {
             axios.post(serverAPI+"/member/signup", elem)
             .then(res => {
                 alert("회원가입이 완료되었습니다.");
-                window.sessionStorage.setItem('id', res.data[0].no);
+                window.sessionStorage.setItem('no', res.data[0].no);
                 window.sessionStorage.setItem('nickname', res.data[0].nickname);
                 document.location.href = '/';
             })
