@@ -131,15 +131,29 @@ const BoardList = (match) => {
 
     //나라선택 메뉴 리스트 만들기
     function getOptions() {
-        let result = [];
-        if(options) {
 
+        console.log("test");
+        let result = [];
+        // let id = 0;
+        // let country_kr = "전체";
+        // let option = {id, country_kr};
+        if(options) {
+            // options.unshift(option);
             for(let i=0; i<options.length; i++) {
-                result = result.concat(
-                    <option key={options[i].id} value={options[i].country_kr}>
-                        {options[i].country_kr}
-                    </option>
-                );
+                // console.log(options[i]);
+                if(country === options[i].country_kr) {
+                    result = result.concat(
+                        <option key={options[i].id} value={options[i].country_kr} selected>
+                            {options[i].country_kr}
+                        </option>
+                    );
+                } else {
+                    result = result.concat(
+                        <option key={options[i].id} value={options[i].country_kr}>
+                            {options[i].country_kr}
+                        </option>
+                    );
+                }
             }
         } else {
             result = result.concat(<div>loading</div>);
@@ -201,44 +215,42 @@ const BoardList = (match) => {
         country = e.target.value;
         console.log(country);
     }
-
     return (
-        <div>
-            <Content>
-                <BoardDiv>
-                    <SelectNav>
-                        <CountrySelect onChange={(e)=>changeCountry(e)} select={country}>
-                            <option value="전체">전체</option>
-                            {getOptions()}
-                        </CountrySelect>
-                        <ButtonSelect onClick={test}>검색</ButtonSelect>
-                    </SelectNav>
-                    <BoardTable>
-                        <thead>
-                        <tr style={{backgroundColor: "gray"}}>
-                            <IdTd>번호</IdTd>
-                            <CountryTd>나라</CountryTd>
-                            <TitleTd>제목</TitleTd>
-                            <WriterTd style={{textAlign: "center"}}>작성자</WriterTd>
-                            <DateTd>작성일</DateTd>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        {getBoards()}
-                        </tbody>
-                    </BoardTable>
-                    <BoardButton>
-                        <div>
+        <Content>
+            <BoardDiv>
+                <SelectNav>
+                    <CountrySelect onChange={(e)=>changeCountry(e)}>
+                        <option value="전체">전체</option>
+                        <option value="전체" selected>테스,트</option>
+                        {getOptions()}
+                    </CountrySelect>
+                    <ButtonSelect onClick={test}>검색</ButtonSelect>
+                </SelectNav>
+                <BoardTable>
+                    <thead>
+                    <tr style={{backgroundColor: "gray"}}>
+                        <IdTd>번호</IdTd>
+                        <CountryTd>나라</CountryTd>
+                        <TitleTd>제목</TitleTd>
+                        <WriterTd style={{textAlign: "center"}}>작성자</WriterTd>
+                        <DateTd>작성일</DateTd>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {getBoards()}
+                    </tbody>
+                </BoardTable>
+                <BoardButton>
+                    <div>
 
-                        </div>
-                        <div>
-                            {paging()}
-                        </div>
-                        <CreateButton><Link to="/board/8">작성</Link></CreateButton>
-                    </BoardButton>
-                </BoardDiv>
-            </Content>
-        </div>
+                    </div>
+                    <div>
+                        {paging()}
+                    </div>
+                    <CreateButton><Link to="/board/8">작성</Link></CreateButton>
+                </BoardButton>
+            </BoardDiv>
+        </Content>
     );
 };
 

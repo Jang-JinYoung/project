@@ -77,6 +77,10 @@ router.get('/select',  (req, res) => {
         if (error) {
             console.log(error);
         }
+        let data = new Object();
+        data.id = 0;
+        data.country_kr = '전체';
+        results.unshift(data);
         res.send(results);
     });
 
