@@ -59,23 +59,26 @@ const SignUp = () => {
         if(!elem.id) {//입력된 정보가 없다
             alert("입력된 정보가 없습니다. 다시 입력해주세요");
         } else {
-
-            const regexId = /^[A-Za-z0-9]+$/;
-            fetch(serverAPI+"/member/checkDuplicate?id="+elem.id)
-                .then(res => res.json())
-                .then((result) => {
-                    // console.log(result[0].cnt);
-                    if (result[0].cnt >= 1) {
-                        alert("이미 있는 아이디입니다.");
-                    } else {
-                        alert("가입 가능한 아이디입니다.");
-                        setBtnDisabled(true);
-                    }
-                })
-                .catch(error => {
-                        console.error(error);
-                    }
-                )
+            const regexId = new RegExp(/^[A-Za-z0-9]+$/);   //영어와 숫자로만 이루어진 정규표현식
+            if(regexId.test(elem.id)) {
+                fetch(serverAPI+"/member/checkDuplicate?id="+elem.id)
+                    .then(res => res.json())
+                    .then((result) => {
+                        // console.log(result[0].cnt);
+                        if (result[0].cnt >= 1) {
+                            alert("이미 있는 아이디입니다.");
+                        } else {
+                            alert("가입 가능한 아이디입니다.");
+                            setBtnDisabled(true);
+                        }
+                    })
+                    .catch(error => {
+                            console.error(error);
+                        }
+                    )
+            } else {
+                alert("영어와 숫자만 입력해주세요.");
+            }
         }
     }
     
@@ -95,7 +98,7 @@ const SignUp = () => {
     }
 
     const handleSubmit = e => {//회원가입
-        e.preventDefault();
+        // e.preventDefault();
 
         if(pw !== re_pw) {
             alert("비밀번호가 일치하지 않습니다");
@@ -105,6 +108,7 @@ const SignUp = () => {
             axios.post(serverAPI+"/member/signup", elem)
             .then(res => {
                 console.log("회원가입");
+                window.document.href="/";
             })
             .catch(err => {
                 console.error(err);
