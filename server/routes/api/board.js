@@ -104,7 +104,6 @@ router.get('/boardDetail', async (req, res) => {
     }));
 
     board = editWriteTime(board);
-    console.log(board);
     result['board'] = board;
 
     res.send(result);
