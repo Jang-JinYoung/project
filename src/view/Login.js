@@ -110,8 +110,8 @@ class Login extends Component {
         return (
             <Content>
                 <LoginDiv>
-                    <form  onSubmit={this.handleSubmit}>
-                        <LogoDiv>Trip Planner</LogoDiv>
+                    <form onSubmit={this.handleSubmit}>
+                        <LogoDiv><Link to="/" style={{color: 'inherit', textDecoration: 'inherit'}}>Trip Planner</Link></LogoDiv>
                         <TextInput type="text" name="id" onChange={this.handleChange} autoComplete='off' placeholder="아이디"/><br/>
                         <TextInput type="password" name="pw" onChange={this.handleChange} autoComplete='off' placeholder ="비밀번호"/><br/>
                         <SubmitButton type="submit" value="로그인"/>

@@ -209,6 +209,7 @@ const BoardList = (match) => {
         country = e.target.value;
         console.log(country);
     }
+
     return (
         <Content>
             <BoardDiv>

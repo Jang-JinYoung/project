@@ -4,16 +4,16 @@ import styled from "styled-components";
 
 //css
 const Content = styled.div`
-        position: relative;
-        width: 100%;
-        height: 760px;
-        top: 55px;
-        background-color : white;
-        display: flex;
-        justify-content: center;
-        flex-direction: column;
-        align-items: center;
-    `;
+    position: relative;
+    width: 100%;
+    height: 760px;
+    top: 55px;
+    background-color : white;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+`;
 
 const BoardDiv = styled.div`
     border: 1px solid #9FA8AF;
@@ -32,6 +32,15 @@ const TitleDiv = styled.div`
     padding-right: 5px;
     margin: 0 auto;
 `;
+
+const CountrySpan =styled.span`
+    color: #9FA8AF;
+`;
+
+const TitleSpan = styled.span`
+    
+`;
+
 const TextDiv = styled.div`
     border-top: 1px solid #9FA8AF;
     width: 850px;
@@ -80,7 +89,8 @@ const BoardDetail = (match) => {
             <Content>
                 <BoardDiv>
                     <TitleDiv>
-                        [{board.country}] {board.title}
+                        <CountrySpan>[{board.country}]</CountrySpan>
+                        <TitleSpan>&nbsp;&nbsp;{board.title}</TitleSpan>
                         <div>
                             {board.writer} {board.writeDate}
                         </div>

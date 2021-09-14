@@ -1,15 +1,56 @@
 import React, {useState} from "react";
 import  "../css/signup.css";
 import axios from "axios";
+import Header from "./Header";
+import styled from "styled-components";
+import {Link} from "react-router-dom";
+import {serverAPI} from "../api";
+
+//css
+const Content = styled.div`
+    position: relative;
+    display: flex;
+    height: 930px;
+    background-color: #F5F6F7;
+`;
+
+const SignupDiv = styled.div`
+    margin: auto;
+`;
+
+const LogoDiv = styled.div`
+    text-align: center;
+    font-size: 30px;
+    color: #11A1C4;
+    margin-bottom: 10px;
+`;
+
+const TextInput = styled.input`
+    margin-bottom: 5px;
+    width: 450px;
+    height: 4vh;
+    padding-left: 10px;
+`;
+
+const SubmitButton = styled.input`
+    background-color: #1C215B;
+    width: 100%;
+    height: 4vh;
+    color: white;
+`;
+
+
+
 
 const SignUp = () => {
 
     const [elem, setElem] = useState({
         id: "",
+        nickname: "",
         pw: "",
         re_pw: ""
     });
-    const {id, pw, re_pw} = elem;
+    const {id, nickname, pw, re_pw} = elem;
 
     const [btnDisabled, setBtnDisabled] = useState(false);
 
@@ -18,7 +59,9 @@ const SignUp = () => {
         if(!elem.id) {//입력된 정보가 없다
             alert("입력된 정보가 없습니다. 다시 입력해주세요");
         } else {
-            fetch('http://localhost:3001/api/member/checkDuplicate?id='+elem.id)
+
+            const regexId = /^[A-Za-z0-9]+$/;
+            fetch(serverAPI+"/member/checkDuplicate?id="+elem.id)
                 .then(res => res.json())
                 .then((result) => {
                     // console.log(result[0].cnt);
@@ -37,13 +80,18 @@ const SignUp = () => {
     }
     
     const handleChange = e => {//아이디, 비밀번호 값
-        const name = e.target.className;
+        const name = e.target.name;
         const value = e.target.value;
         // const {name, value} = e.target;
         setElem({
             ...elem, [name]: value
         });
-        setBtnDisabled(false);
+
+        if(name === "id") {
+            console.log("test");
+            setBtnDisabled(false);
+        }
+        // console.log(elem);
     }
 
     const handleSubmit = e => {//회원가입
@@ -54,7 +102,7 @@ const SignUp = () => {
         } else if(btnDisabled === false) {
             alert("아이디 중복확인을 해주세요.");
         } else {
-            axios.post('http://localhost:3001/api/member/signup', elem)
+            axios.post(serverAPI+"/member/signup", elem)
             .then(res => {
                 console.log("회원가입");
             })
@@ -66,25 +114,25 @@ const SignUp = () => {
 
 
     return (
-        <div className="container">
-            <div className="login">
-                <form className="" onSubmit={handleSubmit}>
-                    {/*<fieldset className="login">*/}
-                    <div className="logo">Trip Planner</div>
-                    <span>
-                        아이디<br/>
-                        <input type="text" className="id" onChange={handleChange} value={id}/>
-                        <button type="button" onClick={checkDuplication} id="btnDuplication" disabled={btnDisabled}>중복확인</button><br/>
-                    </span>
-                    비밀번호<br/>
-                    <input type="password" className="pw" onChange={handleChange} value={pw}/> <br/>
-                    비밀번호 재확인<br/>
-                    <input type="password" className="re_pw" onChange={handleChange} value={re_pw}/> <br/>
-                    <div>ㅁㄴㅇㅁㄴㅇ</div>
-                    <input type="submit" className="btn" value="회원가입"/>
-                    {/*</fieldset>*/}
-                </form>
-            </div>
+        <div>
+            <Content>
+                <SignupDiv>
+                    <form onSubmit={handleSubmit}>
+                        <LogoDiv><Link to="/" style={{color: 'inherit', textDecoration: 'inherit'}}>Trip Planner</Link></LogoDiv>
+                        아이디 <button type="button" onClick={checkDuplication} id="btnDuplication" disabled={btnDisabled}>중복확인</button>
+                        <br/>
+                        <TextInput type="text" name="id" onChange={handleChange}  autoComplete='off'/> <br/>
+                        닉네임<br/>
+                        <TextInput type="text" name="nickname" onChange={handleChange}  autoComplete='off'/>
+                        <br/>
+                        비밀번호<br/>
+                        <TextInput type="password" name="pw" onChange={handleChange} value={pw} autoComplete='off'/> <br/>
+                        비밀번호 재확인<br/>
+                        <TextInput type="password" name="re_pw" onChange={handleChange} value={re_pw} autoComplete='off'/> <br/>
+                        <SubmitButton type="submit" value="회원가입"/>
+                    </form>
+                </SignupDiv>
+            </Content>
         </div>
     );
 }
