@@ -14,8 +14,6 @@ const Content = styled.div`
 
 const BoardWrite = () => {
 
-    // const [title, setTitle] = useState("");
-    // const [context, setContext] = useState("");
 
     const [board, setBoard] = useState({
         title: "",

@@ -14,10 +14,11 @@ router.get('/',  async (req, res) => {
     let values = [begin, end];
     let query =
         (country === undefined || country === "전체") ?
-            "select @ROWNUM:=@ROWNUM+1 as rownum, a.* from board a, (select @ROWNUM:=0) R " :
-            "select @ROWNUM:=@ROWNUM+1 as rownum, a.* from board a, (select @ROWNUM:=0) R where country = '" + country + "'";
+            "select * from board " :
+            "select * from board where country = '" + country + "'";
     
     query = query + " order by writeDate desc limit ?, ?";
+    console.log(query);
 
     //게시글
     const board = await (new Promise(function(resolve) {
@@ -30,6 +31,19 @@ router.get('/',  async (req, res) => {
         });
     }));
 
+    for(let i=0; i<board.length; i++) {
+        let writeDate = JSON.stringify(board[i].writeDate);
+        let date = writeDate.split('T');
+
+        date[0] = date[0].substring(3);
+        date[0] = date[0].replace(/-/gi, '.');
+
+        date[1] = date[1].substring(0, 5);
+        console.log(date[0] + " " + date[1]);
+
+        board[i].writeDate = date[0] + " " + date[1];
+
+    }
     result['board'] = board;
 
     query =

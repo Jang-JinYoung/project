@@ -1,7 +1,7 @@
 import React from 'react';
 import About from "./About";
 import Main from "./Main";
-import { Route } from 'react-router-dom';
+import {Route, Switch} from 'react-router-dom';
 import Map from "./Map";
 import Login from "./Login";
 import Plan from "./Plan";
@@ -9,6 +9,7 @@ import Calendar from "./Calendar";
 import SignUp from "./SignUp";
 import Search from "./Search";
 import Board from "./Board";
+import BoardWrite from "./BoardWrite";
 
 // class App extends React.Component {
 //   constructor(props) {
@@ -49,7 +50,7 @@ import Board from "./Board";
 function App() {
   return (
       <div>
-          {/*<Route path="/" component={Main} exact/>*/}
+          <Route path="/" component={Main} exact/>
           <Route path="/about" component={About} />
           <Route path="/map" component={Map} />
           <Route path="/login" component={Login} />
@@ -57,7 +58,6 @@ function App() {
           <Route path="/search" component={Search}/>
           <Route path="/plan" component={Plan} />
           <Route path="/cal" component={Calendar}/>
-          <Route path="/" component={Main} exact/>
           <Route path="/board" component={Board}/>
       </div>
   );
