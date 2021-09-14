@@ -35,13 +35,27 @@ const TitleDiv = styled.div`
 const TextDiv = styled.div`
     border-top: 1px solid #9FA8AF;
     width: 850px;
-    height: 500px;
+    height: 400px;
     padding-top: 5px;
     padding-left: 5px;
     padding-right: 5px;
     margin: 0 auto;
     
     word-break:break-all;
+`;
+
+const CommentsDiv = styled.div`
+    border-top: 1px solid #9FA8AF;
+    width: 850px;
+    height: 200px;
+    margin: 0 auto;
+`;
+
+const CommentDiv = styled.div`
+    border-bottom: 1px solid #9FA8AF;
+    width: 850px;
+    height: 70px;
+    margin: 0 auto;
 `;
 
 
@@ -74,6 +88,41 @@ const BoardDetail = (match) => {
                     <TextDiv>
                         Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
                     </TextDiv>
+                    <CommentsDiv>
+                        <CommentDiv>
+                            <div>
+                                작성자
+                            </div>
+                            <div>
+                                댓글
+                            </div>
+                            <div>
+                                작성시간
+                            </div>
+                        </CommentDiv>
+                        <CommentDiv>
+                            <div>
+                                작성자
+                            </div>
+                            <div>
+                                댓글
+                            </div>
+                            <div>
+                                작성시간
+                            </div>
+                        </CommentDiv>
+                        <CommentDiv>
+                            <div>
+                                작성자
+                            </div>
+                            <div>
+                                댓글
+                            </div>
+                            <div>
+                                작성시간
+                            </div>
+                        </CommentDiv>
+                    </CommentsDiv>
                 </BoardDiv>
                 이전글
                 다음글
