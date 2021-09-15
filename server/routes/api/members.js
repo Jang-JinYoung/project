@@ -43,12 +43,15 @@ router.post('/signup',  (req, res) => {
         if (error) {
             console.log(error);
         }
+
         query = "select * from user where id = ? and pw = ?";
         connection.query(query, values, function (error, results, fields) {
             if (error) {
                 console.log(error);
             }
-        }
+        });
+
+        res.send(results);
         
     });
 
