@@ -62,7 +62,7 @@ const Header = () => {
             result = result.concat(
                 <MemberItem key="login">
                         {window.sessionStorage.nickname} 님
-                    
+
                     <div>
                         <span onClick={message}>&nbsp;&nbsp;쪽지&nbsp;&nbsp;</span>
                         <span onClick={userInfo}>개인정보&nbsp;&nbsp;</span>

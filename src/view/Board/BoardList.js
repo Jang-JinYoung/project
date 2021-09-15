@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import queryStirng from 'query-string';
 import styled from "styled-components";
-import api from "../api";
+import api from "../../api";
 import uuid from "react-uuid"
 import {Link} from "react-router-dom";
 
@@ -48,10 +48,10 @@ const BoardTable = styled.table`
     `;
 
 const Tr = styled.tr`
-        &:hover {
-            background: #F2F2F2;
-        }
-    `;
+    &:hover {
+        background: #F2F2F2;
+    }
+`;
 
 const IdTd = styled.td`
     border: 1px solid #9FA8AF;
@@ -108,14 +108,7 @@ const BoardList = (match) => {
     const [options, setOptions] = useState([]);
     const [pageCount, setPageCount] = useState();
 
-    //나라선택 메뉴
-    useEffect(() => {
-        fetch(api.serverAPI+"/board/select")
-            .then(res=>res.json())
-            .then(data=> {
-                setOptions(data);
-            });
-    }, []);
+
 
     //게시글 가져오기
     useEffect(() => {
@@ -240,7 +233,7 @@ const BoardList = (match) => {
                     <div>
                         {paging()}
                     </div>
-                    <CreateButton><Link to="/board/8">작성</Link></CreateButton>
+                    <CreateButton><Link to="/board/boardWrite">작성</Link></CreateButton>
                 </BoardButton>
             </BoardDiv>
         </Content>
