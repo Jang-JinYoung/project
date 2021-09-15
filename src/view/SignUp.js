@@ -4,7 +4,7 @@ import axios from "axios";
 import Header from "./Header";
 import styled from "styled-components";
 import {Link} from "react-router-dom";
-import {serverAPI} from "../api";
+import api, {serverAPI} from "../api";
 
 //css
 const Content = styled.div`
@@ -105,9 +105,11 @@ const SignUp = () => {
         } else if(btnDisabled === false) {
             alert("아이디 중복확인을 해주세요.");
         } else {
-            axios.post(serverAPI+"/member/signup", elem)
+            axios.post(api.serverAPI+"/member/signup", elem)
+            // axios.post(serverAPI+"/member/signup", elem)
             .then(res => {
-                alert("회원가입이 완료되었습니다.");
+                // alert("회원가입이 완료되었습니다.");
+                // console.log(res);
                 window.sessionStorage.setItem('no', res.data[0].no);
                 window.sessionStorage.setItem('nickname', res.data[0].nickname);
                 document.location.href = '/';
@@ -125,11 +127,11 @@ const SignUp = () => {
                 <SignupDiv>
                     <form onSubmit={handleSubmit}>
                         <LogoDiv><Link to="/" style={{color: 'inherit', textDecoration: 'inherit'}}>Trip Planner</Link></LogoDiv>
-                        아이디 <button type="button" onClick={checkDuplication} id="btnDuplication" disabled={btnDisabled}>중복확인</button>
+                        아이디 <button type="button" onClick={checkDuplication}  disabled={btnDisabled}>중복확인</button>
                         <br/>
-                        <TextInput type="text" name="id" onChange={handleChange}  autoComplete='off'/> <br/>
+                        <TextInput type="text" name="id" onChange={handleChange} value={id} autoComplete='off'/> <br/>
                         닉네임<br/>
-                        <TextInput type="text" name="nickname" onChange={handleChange}  autoComplete='off'/>
+                        <TextInput type="text" name="nickname" onChange={handleChange} value={nickname} autoComplete='off'/>
                         <br/>
                         비밀번호<br/>
                         <TextInput type="password" name="pw" onChange={handleChange} value={pw} autoComplete='off'/> <br/>

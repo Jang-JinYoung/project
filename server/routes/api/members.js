@@ -49,9 +49,9 @@ router.post('/signup',  (req, res) => {
             if (error) {
                 console.log(error);
             }
+            console.log(results);
+            res.send(results);
         });
-
-        res.send(results);
         
     });
 

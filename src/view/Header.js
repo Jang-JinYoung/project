@@ -65,6 +65,7 @@ const Header = () => {
                     <div>
                         <span onClick={message}>&nbsp;&nbsp;쪽지&nbsp;&nbsp;</span>
                         <span onClick={userInfo}>개인정보</span>
+                        <span onClick={logout}>로그아웃</span>
                     </div>
                 </MemberItem>
             );

@@ -66,8 +66,7 @@ class Login extends Component {
         const {id, pw} = this.state;
         const auth = { id, pw };
 
-        // axios.post(api.serverAPI+"/member/auth", auth)
-        axios.post("http://localhost:3001/api/member/auth", auth)
+        axios.post(api.serverAPI+"/member/auth", auth)
             .then(res => {
                 if(res.data[0].cnt >= 1) {
                     // console.log(res.data[0].no);
@@ -114,7 +113,7 @@ class Login extends Component {
                         <LogoDiv><Link to="/" style={{color: 'inherit', textDecoration: 'inherit'}}>Trip Planner</Link></LogoDiv>
                         <TextInput type="text" name="id" onChange={this.handleChange} autoComplete='off' placeholder="아이디"/><br/>
                         <TextInput type="password" name="pw" onChange={this.handleChange} autoComplete='off' placeholder ="비밀번호"/><br/>
-                        <SubmitButton type="submit" value="로그인"/>
+                        <SubmitButton type="submit" value="로그인" />
                     </form>
                     {this.loginFailure()}
                     <SearchDiv>
