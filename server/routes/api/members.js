@@ -4,15 +4,6 @@ const connection = require('../../config/dbconfig.js');
 const bodyParser = require('body-parser');
 
 
-router.get('/',  (req, res) => {
-    connection.query('SELECT * FROM user', function (error, results, fields) {
-        if (error) {
-            console.log(error);
-        }
-        res.send(results);
-    });
-});
-
 //로그인
 router.post('/auth',  (req, res) => {
 
@@ -21,6 +12,23 @@ router.post('/auth',  (req, res) => {
     const pw = body.pw;
 
     let query = "select count(*) as cnt, a.* from user a where id='"+id+"' and pw='"+pw+"'";
+    connection.query(query, function (error, results, fields) {
+        if (error) {
+            console.log(error);
+        }
+        console.log(results);
+        res.send(results);
+    });
+
+});
+
+//중복확인
+router.get('/checkDuplicate',  (req, res) => {
+
+    console.log(req.query);
+    const id = req.query.id;
+
+    let query = "select count(*) as cnt from user where id = '"+id+"'";
     connection.query(query, function (error, results, fields) {
         if (error) {
             console.log(error);
@@ -57,21 +65,6 @@ router.post('/signup',  (req, res) => {
 
 });
 
-//중복확인
-router.get('/checkDuplicate',  (req, res) => {
-
-    console.log(req.query);
-    const id = req.query.id;
-
-    let query = "select count(*) as cnt from user where id = '"+id+"'";
-    connection.query(query, function (error, results, fields) {
-        if (error) {
-            console.log(error);
-        }
-        res.send(results);
-    });
-
-});
 
 module.exports = router;
 
