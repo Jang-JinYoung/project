@@ -61,10 +61,11 @@ const Header = () => {
         if(window.sessionStorage.no) {
             result = result.concat(
                 <MemberItem key="login">
-                        {window.sessionStorage.nickname} 님 환영합니다.
+                        {window.sessionStorage.nickname} 님
+                    
                     <div>
                         <span onClick={message}>&nbsp;&nbsp;쪽지&nbsp;&nbsp;</span>
-                        <span onClick={userInfo}>개인정보</span>
+                        <span onClick={userInfo}>개인정보&nbsp;&nbsp;</span>
                         <span onClick={logout}>로그아웃</span>
                     </div>
                 </MemberItem>

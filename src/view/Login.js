@@ -61,7 +61,7 @@ class Login extends Component {
 
    handleSubmit = e => {
         //페이지 이동 막아줌
-        // e.preventDefault();
+        e.preventDefault();
 
         const {id, pw} = this.state;
         const auth = { id, pw };
@@ -72,7 +72,8 @@ class Login extends Component {
                     // console.log(res.data[0].no);
                     window.sessionStorage.setItem('no', res.data[0].no);
                     window.sessionStorage.setItem('nickname', res.data[0].nickname);
-                    document.location.href = '/';
+                    // document.location.href = '/';
+                    this.props.history.push('/');
                 } else {
                     console.log("로그인 실패");
                     this.setState({

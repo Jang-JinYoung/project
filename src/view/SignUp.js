@@ -42,7 +42,7 @@ const SubmitButton = styled.input`
 
 
 
-const SignUp = () => {
+const SignUp = (match) => {
 
     const [elem, setElem] = useState({
         id: "",
@@ -98,7 +98,7 @@ const SignUp = () => {
     }
 
     const handleSubmit = e => {//회원가입
-        // e.preventDefault();
+        e.preventDefault();
 
         if(pw !== re_pw) {
             alert("비밀번호가 일치하지 않습니다");
@@ -113,6 +113,7 @@ const SignUp = () => {
                 window.sessionStorage.setItem('no', res.data[0].no);
                 window.sessionStorage.setItem('nickname', res.data[0].nickname);
                 document.location.href = '/';
+                // matches.hist
             })
             .catch(err => {
                 console.error(err);
