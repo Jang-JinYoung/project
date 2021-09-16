@@ -110,22 +110,18 @@ router.get('/boardDetail', async (req, res) => {
 
 });
 
-router.post('/write', async (req, res) => {
+router.post('/write',  (req, res) => {
 
 
     const query = "insert into board(title, writer, country, text) values (?, ?, ?, ?)";
-    const values = [req.body.title, req.body.writer, req.body.country, req.bdoy.text];
+    const values = [req.body.title, req.body.nickname, req.body.country, req.body.text];
 
-    const board = await (new Promise(function(resolve) {
-        connection.query(query, values, function (error, results, fields) {
-            if (error) {
-                console.log(error);
-            }
-            resolve(results);
-        });
-    }));
-
-
+    connection.query(query, values, function (error, results, fields) {
+        if (error) {
+            console.log(error);
+        }
+        res.send(results);
+    });
 
 
 });

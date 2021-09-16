@@ -109,6 +109,14 @@ const BoardList = (match) => {
     const [pageCount, setPageCount] = useState();
 
 
+    //나라선택 메뉴
+    useEffect(() => {
+        fetch(api.serverAPI+"/board/select")
+            .then(res=>res.json())
+            .then(data=> {
+                setOptions(data);
+            });
+    }, []);
 
     //게시글 가져오기
     useEffect(() => {
@@ -198,9 +206,9 @@ const BoardList = (match) => {
     }
 
     const changeCountry = (e) => {
-        console.log(e.target.value);
+        // console.log(e.target.value);
         country = e.target.value;
-        console.log(country);
+        // console.log(country);
     }
 
     return (

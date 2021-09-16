@@ -3,6 +3,7 @@ import styled from "styled-components";
 import Header from "../Header";
 import api from "../../api";
 import {Button} from "@material-ui/core";
+import axios from "axios";
 
 
 //css
@@ -70,8 +71,15 @@ const TextInput = styled.textarea`
 
 const BoardWrite = () => {
 
+    const nickname = sessionStorage.getItem("nickname")
 
     const [options, setOptions] = useState([]);
+    const [board, setBoard] = useState({
+        title: "",
+        nickname: nickname,
+        text: "",
+        country: "교황청"
+    });
 
     //나라선택 메뉴
     useEffect(() => {
@@ -98,24 +106,53 @@ const BoardWrite = () => {
         return result;
     }
 
+    const onchange = (e) => {
+
+        setBoard({
+            ...board, [e.target.name]: e.target.value
+        });
+
+        console.log(board);
+    }
+
+    function boardWrite() {
+
+        const {title, nickname, text, country} = setBoard;
+        const board = {title, nickname, text, country};
+
+        axios.post(api.serverAPI+"/board/write", board)
+            .then(res => {
+                const result = res.data.affectedRows;
+                if(result === 1) {
+                    document.location.href = '/board?country=전체&page=1';
+                }
+            })
+            .catch(err => {
+                console.error(err);
+            });
+    }
+
+    const changeCountry = (e) => {
+        setBoard({
+            country: e.target.value
+        });
+    }
+
     return(
         <BoardDiv>
             <TitleDiv>
                 <TitleSpan>
-                    <CountrySelect>
+                    <CountrySelect onChange={(e)=>changeCountry(e)}>
                         {getOptions()}
                     </CountrySelect>
-                    <TitleInput type="text" autoComplete="off" placeholder="제목을 입력하세요">
-
-                    </TitleInput>
+                    <TitleInput name="title" type="text" autoComplete="off" placeholder="제목을 입력하세요"
+                                onChange={(e) => onchange(e)}/>
                 </TitleSpan>
             </TitleDiv>
             <TextDiv>
-                <TextInput>
-
-                </TextInput>
+                <TextInput name="text" onChange={(e) => onchange(e)}/>
                 <div>
-                    작성
+                    <button onClick={boardWrite}>작성</button>
                 </div>
             </TextDiv>
         </BoardDiv>

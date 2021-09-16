@@ -1,7 +1,6 @@
 import React, {useState} from "react";
 import  "../css/signup.css";
 import axios from "axios";
-import Header from "./Header";
 import styled from "styled-components";
 import {Link} from "react-router-dom";
 import api, {serverAPI} from "../api";
