@@ -126,5 +126,21 @@ router.post('/write',  (req, res) => {
 
 });
 
+router.get('/test',  (req, res) => {
+
+
+    const query = "select * from board";
+
+    connection.query(query, function (error, results, fields) {
+        if (error) {
+            console.log(error);
+        }
+        res.send(results);
+    });
+
+
+});
+
+
 module.exports = router;
 
