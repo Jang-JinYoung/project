@@ -107,20 +107,17 @@ const BoardWrite = () => {
     }
 
     const onchange = (e) => {
-
         setBoard({
             ...board, [e.target.name]: e.target.value
         });
-
-        console.log(board);
     }
 
     function boardWrite() {
 
-        const {title, nickname, text, country} = setBoard;
-        const board = {title, nickname, text, country};
+        const {title, nickname, text, country} = board;
+        const boardContent = {title, nickname, text, country};
 
-        axios.post(api.serverAPI+"/board/write", board)
+        axios.post(api.serverAPI+"/board/write", boardContent)
             .then(res => {
                 const result = res.data.affectedRows;
                 if(result === 1) {
@@ -145,8 +142,8 @@ const BoardWrite = () => {
                     <CountrySelect onChange={(e)=>changeCountry(e)}>
                         {getOptions()}
                     </CountrySelect>
-                    <TitleInput name="title" type="text" autoComplete="off" placeholder="제목을 입력하세요"
-                                onChange={(e) => onchange(e)}/>
+                    <TitleInput name="title" type="text" autoComplete="off"
+                                placeholder="제목을 입력하세요" onChange={(e) => onchange(e)}/>
                 </TitleSpan>
             </TitleDiv>
             <TextDiv>

@@ -222,7 +222,7 @@ const BoardList = (match) => {
                 </SelectNav>
                 <BoardTable>
                     <thead>
-                    <tr style={{backgroundColor: "gray"}}>
+                    <tr style={{backgroundColor: "#DEE7EE"}}>
                         <IdTd>번호</IdTd>
                         <CountryTd>나라</CountryTd>
                         <TitleTd>제목</TitleTd>
