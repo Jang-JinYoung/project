@@ -8,7 +8,7 @@ import BoardRead from "./BoardRead";
 const Content = styled.div`
     position: relative;
     width: 100%;
-    height: 760px;
+    // height: auto;
     top: 55px;
     background-color : white;
     display: flex;

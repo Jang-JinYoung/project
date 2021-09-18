@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import styled from "styled-components";
-import Header from "../Header";
+import Header from "../Header/Header";
 import api from "../../api";
 import {Button} from "@material-ui/core";
 import axios from "axios";

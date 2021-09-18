@@ -19,14 +19,15 @@ function editWriteTime(board) {
     return board;
 }
 
-router.get('/boardList',  async (req, res) => {
+//게시글 리스트
+router.get('/list',  async (req, res) => {
 
     let result = {};
     const country = req.query.country;
     const page = req.query.page;
 
     let begin = ((page-1)*10);
-    let end = (page*10);
+    let end = 10;
 
     let values = [begin, end];
     let query =
@@ -43,7 +44,6 @@ router.get('/boardList',  async (req, res) => {
                 console.log(error);
             }
             resolve(results);
-            // res.send(results);
         });
     }));
 
@@ -70,6 +70,7 @@ router.get('/boardList',  async (req, res) => {
     res.send(result);
 });
 
+//메뉴
 router.get('/select',  (req, res) => {
 
     const query = "select id, country_kr from countryInfo where continent ='유럽' order by country_kr asc";
@@ -87,13 +88,16 @@ router.get('/select',  (req, res) => {
 
 });
 
-router.get('/boardDetail', async (req, res) => {
+//게시글 읽기
+router.post('/read', async (req, res) => {
 
     let result = {};
-    const id = req.query.id;
-    const query = "select * from board where id = " + id;
+    console.log(req.body);
+    const board_id = req.body.board_id;
+    const user_no = req.body.user_no;
 
-
+    //게시글
+    let query = "select * from board where id = " + board_id;
     let board = await (new Promise(function(resolve) {
         connection.query(query, function (error, results, fields) {
             if (error) {
@@ -105,11 +109,28 @@ router.get('/boardDetail', async (req, res) => {
 
     board = editWriteTime(board);
     result['board'] = board;
+    
+    //코멘트
+    query = "select *, (select nickname from user where no = ?) as nickname from comment where board_id = ? limit 0,5"
+    let values = [user_no, board_id];
+
+    let comment = await (new Promise(function(resolve) {
+        connection.query(query, values, function (error, results, fields) {
+            if (error) {
+                console.log(error);
+            }
+            resolve(results);
+        });
+    }));
+
+    comment = editWriteTime(comment);
+    result['comment'] = comment;
 
     res.send(result);
 
 });
 
+//게시글 쓰기
 router.post('/write',  (req, res) => {
 
 
@@ -126,20 +147,6 @@ router.post('/write',  (req, res) => {
 
 });
 
-router.get('/test',  (req, res) => {
-
-
-    const query = "select * from board";
-
-    connection.query(query, function (error, results, fields) {
-        if (error) {
-            console.log(error);
-        }
-        res.send(results);
-    });
-
-
-});
 
 
 module.exports = router;

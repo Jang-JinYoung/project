@@ -25,6 +25,18 @@ create table board
     writeDate datetime default CURRENT_TIMESTAMP null
 );
 
+-- 댓글 테이블
+create table comment
+(
+    id        int(10) auto_increment    -- 번호
+        primary key,
+    text      varchar(300)                       null, -- 댓글
+    writer int(10) null, -- 글쓴이 번호
+    board_id int(10), -- 게시글 번호
+    writeDate datetime default CURRENT_TIMESTAMP null -- 작성시간
+);
+
+
 -- 유저 Table
 create table user
 (

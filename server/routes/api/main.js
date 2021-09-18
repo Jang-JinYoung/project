@@ -8,8 +8,6 @@ router.get('/country',  (req, res) => {
 
     const query = "select * from countryInfo where id = " + rand;
 
-    console.log(query);
-
     connection.query(query, function (error, results, fields) {
         if (error) {
             console.log(error);

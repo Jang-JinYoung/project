@@ -2,8 +2,9 @@ import React, {useEffect, useState} from 'react';
 import GoogleApiWrapper from "./Map";
 import  "../css/main.css";
 import '../css/section.css';
-import Header from "./Header";
+import Header from "./Header/Header";
 import styled from "styled-components";
+import SubHeader from "./Header/SubHeader";
 const api = require("../api");
 
 //css
@@ -74,6 +75,7 @@ const Main = () => {
         return (
             <div>
                 <Header/>
+                <SubHeader/>
                 <Content>
                     <CountryInfo>
                         <thead>

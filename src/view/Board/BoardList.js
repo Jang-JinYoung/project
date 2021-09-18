@@ -120,8 +120,8 @@ const BoardList = (match) => {
 
     //게시글 가져오기
     useEffect(() => {
-        const url = api.serverAPI+"/board/boardList?country="+country+"&page="+page;
-        // console.log(url);
+        const url = api.serverAPI+"/board/list?country="+country+"&page="+page;
+        // const url = "http://localhost:3001/api/board/boardList?country="+country+"&page="+page;
         fetch(url)
             .then(res=>res.json())
             .then(data=> {
