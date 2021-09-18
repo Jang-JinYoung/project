@@ -122,9 +122,22 @@ router.post('/read', async (req, res) => {
             resolve(results);
         });
     }));
+    
+    //코멘트 페이지
+    query = "select count(*)/5 as count from comment where board_id = ?";
+    values = [board_id];
 
-    comment = editWriteTime(comment);
-    result['comment'] = comment;
+    let pageCount = await (new Promise(function(resolve) {
+        connection.query(query, values, function (error, results, fields) {
+            if (error) {
+                console.log(error);
+            }
+            resolve(results);
+        });
+    }));
+
+    pageCount = editWriteTime(comment);
+    result['pageCount'] = pageCount;
 
     res.send(result);
 

@@ -1,4 +1,4 @@
-import {useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import api from "../../api";
 import styled from "styled-components";
 import axios from "axios";
@@ -79,16 +79,17 @@ const BoardRead = (id) => {
     const user_no = 1;
     const [board, setBoard] = useState([]);
     const [comments, setComments] = useState([]);
+    const [pageCount, setPageCount] = useState([]);
 
     //글내용 가져오기
     useEffect(() => {
-        const url = "http://localhost:3001/api/board/read";
         const elem = {board_id, user_no};
         // fetch(api.serverAPI+"/board/read",elem)
-        axios.post(url, elem)
+        axios.post(api.serverAPI+"/board/read", elem)
             .then(res => {
                 setBoard(res.data.board[0]);
                 setComments(res.data.comment);
+                setPageCount(res.data.pageCount[0]);
             })
             .catch(err => {
                 console.error(err);
@@ -117,6 +118,17 @@ const BoardRead = (id) => {
         return result;
     }
 
+    //댓글 페이징
+    function paging() {
+        let result = [];
+        for(let i=0; i<pageCount; i++) {
+            result = result.concat(
+                <span key={i}>{i+1}</span>
+            )
+        }
+        return result;
+    }
+
     if(board) {
         return(
             <BoardDiv>
@@ -133,6 +145,7 @@ const BoardRead = (id) => {
                 <span style={{marginLeft: "46px"}}>댓글({comments.length})</span>
                 <CommentsDiv>
                     {getComments()}
+                    {paging()}
                     <TextInput/>
                 </CommentsDiv>
             </BoardDiv>

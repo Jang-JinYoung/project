@@ -98,9 +98,6 @@ const CreateButton = styled.button`
 
 const BoardList = (match) => {
 
-    // const { search } = match.location.search;
-    // console.log(match.location.search);
-
     const queryObj = queryStirng.parse(match.location.search);
     let {country, page} = queryObj;
 
