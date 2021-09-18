@@ -92,7 +92,6 @@ router.get('/select',  (req, res) => {
 router.post('/read', async (req, res) => {
 
     let result = {};
-    console.log(req.body);
     const board_id = req.body.board_id;
     const user_no = req.body.user_no;
 
@@ -122,6 +121,9 @@ router.post('/read', async (req, res) => {
             resolve(results);
         });
     }));
+
+    comment = editWriteTime(comment);
+    result['comment'] = comment;
     
     //코멘트 페이지
     query = "select count(*)/5 as count from comment where board_id = ?";
@@ -136,7 +138,6 @@ router.post('/read', async (req, res) => {
         });
     }));
 
-    pageCount = editWriteTime(comment);
     result['pageCount'] = pageCount;
 
     res.send(result);
@@ -144,8 +145,7 @@ router.post('/read', async (req, res) => {
 });
 
 //게시글 쓰기
-router.post('/write',  (req, res) => {
-
+router.post('/writeBoard',  (req, res) => {
 
     const query = "insert into board(title, writer, country, text) values (?, ?, ?, ?)";
     const values = [req.body.title, req.body.nickname, req.body.country, req.body.text];
@@ -156,11 +156,28 @@ router.post('/write',  (req, res) => {
         }
         res.send(results);
     });
-
-
 });
 
+//댓글 쓰기
+router.post('/writeComment', (req, res) => {
 
+    const query = "insert into comment(text, writer, board_id) values (?, ?, ?)"
+    const body = req.body;
+
+    //insert into comment(text, writer, board_id) values ('test', 1, 38);
+    let values = [body.comment, body.user_no, body.board_id];
+
+    connection.query(query, values, function (error, results, fields) {
+        if (error) {
+            console.log(error);
+        }
+        res.send(results);
+    });
+
+
+
+
+})
 
 module.exports = router;
 

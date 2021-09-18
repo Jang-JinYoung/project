@@ -8,7 +8,7 @@ const BoardDiv = styled.div`
     position: relative;
     border: 1px solid #9FA8AF;
     width: 950px;
-    height: 990px;
+    height: 940px;
     margin-bottom: 50px;
 `;
 
@@ -59,7 +59,7 @@ const CommentDiv = styled.div`
 
 const TextInput = styled.textarea`
     width: 845px;
-    height: 150px;
+    height: 100px;
     resize: none;
     margin-top: 15px;
     
@@ -79,23 +79,25 @@ const BoardRead = (id) => {
     const user_no = 1;
     const [board, setBoard] = useState([]);
     const [comments, setComments] = useState([]);
-    const [pageCount, setPageCount] = useState([]);
+    const [pageCount, setPageCount] = useState();
+    const [comment, setComment] = useState();
 
-    //글내용 가져오기
+    //글정보 (게시글, 댓글, 댓글페이징) 가져오기
     useEffect(() => {
         const elem = {board_id, user_no};
-        // fetch(api.serverAPI+"/board/read",elem)
-        axios.post(api.serverAPI+"/board/read", elem)
+        // axios.post(api.serverAPI+"/board/read", elem)
+        axios.post("http://localhost:3001/api/board/read", elem)
             .then(res => {
                 setBoard(res.data.board[0]);
                 setComments(res.data.comment);
-                setPageCount(res.data.pageCount[0]);
+                setPageCount(res.data.pageCount[0].count);
             })
             .catch(err => {
                 console.error(err);
             });
     }, []);
 
+    //기존 댓글 불러오기
     const getComments = () => {
 
         let result = [];
@@ -112,7 +114,6 @@ const BoardRead = (id) => {
                     </div>
                 </CommentDiv>
             )
-            console.log(comments[i]);
         }
 
         return result;
@@ -126,8 +127,29 @@ const BoardRead = (id) => {
                 <span key={i}>{i+1}</span>
             )
         }
+
         return result;
     }
+
+    //댓글 작성
+    const writeComment = e => {
+        setComment(e.target.value);
+    }
+
+    //댓글 작성 버튼 클릭 이벤트
+    function clickWriteCommentBtn() {
+
+        const elem = {board_id, user_no, comment};
+        axios.post("http://localhost:3001/api/board/writeComment", elem)
+            .then(res => {
+                console.log(res);
+            })
+            .catch(err => {
+                console.error(err);
+            });
+    }
+
+
 
     if(board) {
         return(
@@ -146,7 +168,8 @@ const BoardRead = (id) => {
                 <CommentsDiv>
                     {getComments()}
                     {paging()}
-                    <TextInput/>
+                    <TextInput onChange={e => writeComment(e)}/>
+                    <button onClick={clickWriteCommentBtn}>작성</button>
                 </CommentsDiv>
             </BoardDiv>
         );
