@@ -1,6 +1,15 @@
 import { useState} from 'react';
+import styled from "styled-components";
 import moment from 'moment';
 import "../css/calendar.css";
+
+
+
+const DateTd = styled.td`
+    width: 30px;
+    height: 30px;
+`;
+
 
 const Calendar = (props) => {
 
@@ -13,7 +22,6 @@ const Calendar = (props) => {
 
     //달력 요일 만드는 함수
     const calendarArr=()=>{
-
         let result = [];
         for (let week = firstWeek; week <= lastWeek; week++) {
             result = result.concat(
@@ -22,46 +30,61 @@ const Calendar = (props) => {
                         Array(7).fill(0).map((data, index) => {
                             let days = today.clone().startOf('year').week(week).startOf('week').add(index, 'day'); //d로해도되지만 직관성
 
-                            if(moment().format('YYYYMMDD') === days.format('YYYYMMDD')){
+                            if(moment().format('YYYYMMDD') === days.format('YYYYMMDD')){// 해당 월, 일
                                 return(
-                                    <td
+                                    <DateTd
                                         key={index} style={{backgroundColor:'red'}}
+                                        name={days.format('MMDD')}
                                         id={days.format('D')}
-                                        onClick={e => props.function(days.format('D'))}
+                                        onClick={e => props.function(days.format('MM'), days.format('DD'))}
                                     >
                                         {days.format('D')}
-                                    </td>
+                                    </DateTd>
                                 );
-                            }else if(days.format('MM') !== today.format('MM')){
+                            }else if(days.format('MM') !== today.format('MM')){//해당 월
                                 return(
-                                    <td key={index} style={{backgroundColor:'gray'}}
+                                    <DateTd key={index} style={{backgroundColor:'gray'}}
+                                        name={days.format('MMDD')}
                                         id={days.format('D')}
-                                        onClick={e => props.function(days.format('D'))}
+                                        onClick={e => props.function(days.format('MM'),days.format('DD'))}
                                     >
                                         {days.format('D')}
-                                    </td>
+                                    </DateTd>
                                 );
                             }else{
-                                return(
-                                    <td key={index}
-                                        id={days.format('D')}
-                                        onClick={e => props.function(days.format('D'))}
-                                    >
-                                        {days.format('D')}
-                                    </td>
-                                );
+                                if(moment().format('YYYYMMDD') > days.format('YYYYMMDD')) {//지난날은 선택불가
+                                    return(
+                                        <DateTd key={index}
+                                            name={days.format('MMDD')}
+                                            style={{backgroundColor:'black'}}
+                                            id={days.format('D')}
+                                        >
+                                            {days.format('D')}
+                                        </DateTd>
+                                    );
+                                }
+                                else {
+                                    return(
+                                        <DateTd key={index}
+                                            name={days.format('MMDD')}
+                                            id={days.format('D')}
+                                            onClick={e => props.function(days.format('MM'), days.format('DD'))}
+                                        >
+                                            {days.format('D')}
+                                        </DateTd>
+                                    );
+                                }
                             }
                         })
                     }
                 </tr>
             );
         }
-        console.log(result);
         return result;
     }
     
     return (
-        <div id="calendar">
+        <div id="calendar" >
             <div id="date">
                 <button onClick={() => setMoment(getMoment.clone().subtract(1, 'month'))}> prev </button>
                 <span> {today.format('YYYY년 MM월')}</span>
@@ -70,13 +93,13 @@ const Calendar = (props) => {
             <table id="dateTable">
                 <thead>
                     <tr>
-                        <td>월</td>
-                        <td>화</td>
-                        <td>수</td>
-                        <td>목</td>
-                        <td>금</td>
-                        <td>토</td>
-                        <td>일</td>
+                        <DateTd>월</DateTd>
+                        <DateTd>화</DateTd>
+                        <DateTd>수</DateTd>
+                        <DateTd>목</DateTd>
+                        <DateTd>금</DateTd>
+                        <DateTd>토</DateTd>
+                        <DateTd>일</DateTd>
                     </tr>
                 </thead>
                 <tbody>
