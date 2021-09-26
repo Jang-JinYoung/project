@@ -3,7 +3,6 @@ import api from "../../api";
 import styled from "styled-components";
 import axios from "axios";
 
-
 const BoardDiv = styled.div`
     position: relative;
     border: 1px solid #9FA8AF;
@@ -85,8 +84,8 @@ const BoardRead = (id) => {
     //글정보 (게시글, 댓글, 댓글페이징) 가져오기
     useEffect(() => {
         const elem = {board_id, user_no};
-        // axios.post(api.serverAPI+"/board/read", elem)
-        axios.post("http://localhost:3001/api/board/read", elem)
+        axios.post(api.serverAPI+"/board/read", elem)
+        // axios.post("http://localhost:3001/api/board/read", elem)
             .then(res => {
                 setBoard(res.data.board[0]);
                 setComments(res.data.comment);

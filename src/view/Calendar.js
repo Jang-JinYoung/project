@@ -3,8 +3,6 @@ import styled from "styled-components";
 import moment from 'moment';
 import "../css/calendar.css";
 
-
-
 const DateTd = styled.td`
     width: 30px;
     height: 30px;
